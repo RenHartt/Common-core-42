@@ -6,13 +6,13 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 18:18:15 by bgoron            #+#    #+#             */
-/*   Updated: 2023/11/12 15:51:06 by bgoron           ###   ########.fr       */
+/*   Updated: 2023/11/13 14:42:30 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_isinset(char c, const char *set)
+int	ft_isinset(char c,char *set)
 {
 	size_t	i;
 

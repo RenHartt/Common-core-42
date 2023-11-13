@@ -6,15 +6,15 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 20:26:57 by bgoron            #+#    #+#             */
-/*   Updated: 2023/11/12 16:05:10 by bgoron           ###   ########.fr       */
+/*   Updated: 2023/11/13 16:38:15 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_strlen(const char *s)
+unsigned long long	ft_strlen(char *s)
 {
-	int	i;
+	long long	i;
 
 	i = 0;
 	if (!s[i])

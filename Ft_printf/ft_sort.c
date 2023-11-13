@@ -6,7 +6,7 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 11:10:56 by bgoron            #+#    #+#             */
-/*   Updated: 2023/11/12 16:41:39 by bgoron           ###   ########.fr       */
+/*   Updated: 2023/11/13 15:39:58 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,7 @@ int	ft_sort(va_list	*args, char *str, size_t i)
 	else if (str[i] == 's')
 		return ft_putstr(va_arg(*args, char *));
 	else if (str[i] == 'p')
-	{
-		ft_putstr("0x");
-		return (ft_putnbr_base(va_arg(*args, long long), "0123456789abcdef") + 2);
-	}
+		return ft_pointer(va_arg(*args, unsigned long long), "0123456789abcdef");
 	else if (str[i] == 'd' || str[i] == 'i')
 		return ft_putnbr(va_arg(*args, int));
 	else if (str[i] == 'u')

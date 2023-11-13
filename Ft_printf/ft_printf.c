@@ -6,7 +6,7 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 14:46:28 by bgoron            #+#    #+#             */
-/*   Updated: 2023/11/12 15:57:48 by bgoron           ###   ########.fr       */
+/*   Updated: 2023/11/13 16:41:52 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,3 @@ int	ft_printf(const char *type, ...)
 	va_end(args);
 	return (count);
 }
-
