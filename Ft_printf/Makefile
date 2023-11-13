@@ -6,7 +6,7 @@
 #    By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/08 19:07:50 by bgoron            #+#    #+#              #
-#    Updated: 2023/11/13 15:31:50 by bgoron           ###   ########.fr        #
+#    Updated: 2023/11/13 19:18:52 by bgoron           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ ft_putnbr_base.c \
 ft_putchar.c \
 ft_putstr.c \
 ft_strlen.c \
-ft_sort.c \
+ft_orient.c \
 ft_isinset.c \
 ft_putnbr.c \
 ft_pointer.c \

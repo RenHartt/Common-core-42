@@ -6,7 +6,7 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 14:46:28 by bgoron            #+#    #+#             */
-/*   Updated: 2023/11/13 16:41:52 by bgoron           ###   ########.fr       */
+/*   Updated: 2023/11/13 19:18:26 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	ft_printf(const char *type, ...)
 	{
 		if (type[i] == '%' && ft_isinset(type[i + 1], "cspdiuxX%"))
 		{
-			count += ft_sort(&args, (char *)type, i + 1);
+			count += ft_orient(&args, (char *)type, i + 1);
 			i += 2;
 		}
 		else

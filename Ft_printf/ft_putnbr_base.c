@@ -6,13 +6,13 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 15:49:01 by bgoron            #+#    #+#             */
-/*   Updated: 2023/11/13 16:28:27 by bgoron           ###   ########.fr       */
+/*   Updated: 2023/11/13 19:19:31 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_putnbr_base(long long nb,char *base)
+int	ft_putnbr_base(unsigned long long nb, char *base)
 {
 	size_t	i;
 
