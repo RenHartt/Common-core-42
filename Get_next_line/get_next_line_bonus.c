@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 19:25:43 by bgoron            #+#    #+#             */
-/*   Updated: 2023/11/18 20:53:31 by bgoron           ###   ########.fr       */
+/*   Updated: 2023/11/18 20:54:01 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,24 +78,24 @@ char	*rfile(int fd, char *line)
 
 char	*get_next_line(int fd)
 {
-	static char	*line;
+	static char	*line[1024];
 	char 		*tmp;
 
 	tmp = NULL;
-	line = rfile(fd, line);
-	if (line == NULL)
+	line[fd] = rfile(fd, line[fd]);
+	if (line[fd] == NULL)
 		return (NULL);
-	tmp = fill(line, tmp);
-	line = newstatic(line);
+	tmp = fill(line[fd], tmp);
+	line[fd] = newstatic(line[fd]);
 	if (!ft_strchr(tmp, '\n'))
 	{
-		free(line);
+		free(line[fd]);
 		if (!*tmp)
 		{
 			free(tmp);
 			tmp = NULL;
 		}
-		line = NULL;
+		line[fd] = NULL;
 	}
 	return (tmp);
 }
