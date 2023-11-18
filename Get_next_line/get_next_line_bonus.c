@@ -6,7 +6,7 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 19:25:43 by bgoron            #+#    #+#             */
-/*   Updated: 2023/11/18 20:54:01 by bgoron           ###   ########.fr       */
+/*   Updated: 2023/11/18 20:59:07 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*newstatic(char *str)
 	i = 0;
 	if (!str)
 		return (ft_calloc(1, 1));
-	while (str[i] && str[i] != '\n') 
+	while (str[i] && str[i] != '\n')
 		i++;
 	tmp = ft_substr(str, i + 1, ft_strlen(str) - i);
 	free(str);
@@ -44,7 +44,7 @@ char	*fill(char *str1, char *str2)
 		if (str1[i] == '\n')
 		{
 			i++;
-			break;
+			break ;
 		}
 		i++;
 	}
@@ -79,7 +79,7 @@ char	*rfile(int fd, char *line)
 char	*get_next_line(int fd)
 {
 	static char	*line[1024];
-	char 		*tmp;
+	char		*tmp;
 
 	tmp = NULL;
 	line[fd] = rfile(fd, line[fd]);

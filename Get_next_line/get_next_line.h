@@ -6,16 +6,16 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 19:25:32 by bgoron            #+#    #+#             */
-/*   Updated: 2023/11/18 18:46:39 by bgoron           ###   ########.fr       */
+/*   Updated: 2023/11/18 21:07:48 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 
-#ifndef BUFFER_SIZE
-# define BUFFER_SIZE 0
-#endif
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 0
+# endif
 
 # include <unistd.h>
 # include <stdlib.h>
