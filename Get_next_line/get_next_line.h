@@ -6,7 +6,7 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 19:25:32 by bgoron            #+#    #+#             */
-/*   Updated: 2023/11/18 21:07:48 by bgoron           ###   ########.fr       */
+/*   Updated: 2023/11/19 13:51:44 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ char	*ft_strchr(char *s, int c);
 size_t	ft_strlen(char *s);
 void	*ft_calloc(size_t nmemb, size_t size);
 char	*ft_substr(char *s, size_t start, size_t len);
-char	*rfile(int fd, char *line);
+char	*rline(int fd, char *line);
 char	*fill(char *str1, char *str2);
-char	*newstatic(char *str);
+char	*trimstatic(char *str);
 
 #endif

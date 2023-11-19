@@ -6,13 +6,13 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 19:25:43 by bgoron            #+#    #+#             */
-/*   Updated: 2023/11/18 20:59:07 by bgoron           ###   ########.fr       */
+/*   Updated: 2023/11/19 13:52:13 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*newstatic(char *str)
+char	*trimstatic(char *str)
 {
 	size_t	i;
 	char	*tmp;
@@ -52,7 +52,7 @@ char	*fill(char *str1, char *str2)
 	return (str2);
 }
 
-char	*rfile(int fd, char *line)
+char	*rline(int fd, char *line)
 {
 	int		r;
 	char	*curent;
@@ -82,11 +82,11 @@ char	*get_next_line(int fd)
 	char		*tmp;
 
 	tmp = NULL;
-	line[fd] = rfile(fd, line[fd]);
+	line[fd] = rline(fd, line[fd]);
 	if (line[fd] == NULL)
 		return (NULL);
 	tmp = fill(line[fd], tmp);
-	line[fd] = newstatic(line[fd]);
+	line[fd] = trimstatic(line[fd]);
 	if (!ft_strchr(tmp, '\n'))
 	{
 		free(line[fd]);
