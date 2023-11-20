@@ -6,11 +6,11 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 19:25:55 by bgoron            #+#    #+#             */
-/*   Updated: 2023/11/18 21:03:34 by bgoron           ###   ########.fr       */
+/*   Updated: 2023/11/20 17:53:43 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 size_t	ft_strlen(char *s)
 {

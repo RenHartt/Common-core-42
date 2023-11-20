@@ -6,13 +6,13 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 19:25:43 by bgoron            #+#    #+#             */
-/*   Updated: 2023/11/19 13:51:36 by bgoron           ###   ########.fr       */
+/*   Updated: 2023/11/20 17:50:13 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*trimstatic(char *str)
+char	*restfile(char *str)
 {
 	size_t	i;
 	char	*tmp;
@@ -27,7 +27,7 @@ char	*trimstatic(char *str)
 	return (tmp);
 }
 
-char	*fill(char *str1, char *str2)
+char	*readedline(char *str1, char *str2)
 {
 	size_t	i;
 
@@ -52,27 +52,27 @@ char	*fill(char *str1, char *str2)
 	return (str2);
 }
 
-char	*rline(int fd, char *line)
+char	*readfile(int fd, char *line)
 {
 	int		r;
-	char	*curent;
+	char	*buffer;
 
 	r = 1;
-	curent = ft_calloc(sizeof(char), (BUFFER_SIZE + 1));
-	if (!curent)
+	buffer = ft_calloc(sizeof(char), (BUFFER_SIZE + 1));
+	if (!buffer)
 		return (NULL);
-	while (!ft_strchr(curent, '\n') && r != 0)
+	while (!ft_strchr(buffer, '\n') && r != 0)
 	{
-		r = read(fd, curent, BUFFER_SIZE);
+		r = read(fd, buffer, BUFFER_SIZE);
 		if (r <= 0)
 		{
-			free(curent);
+			free(buffer);
 			return (line);
 		}
-		curent[r] = '\0';
-		line = ft_strjoin(line, curent);
+		buffer[r] = '\0';
+		line = ft_strjoin(line, buffer);
 	}
-	free(curent);
+	free(buffer);
 	return (line);
 }
 
@@ -82,11 +82,11 @@ char	*get_next_line(int fd)
 	char		*tmp;
 
 	tmp = NULL;
-	line = rline(fd, line);
+	line = readfile(fd, line);
 	if (line == NULL)
 		return (NULL);
-	tmp = fill(line, tmp);
-	line = trimstatic(line);
+	tmp = readedline(line, tmp);
+	line = restfile(line);
 	if (!ft_strchr(tmp, '\n'))
 	{
 		free(line);
