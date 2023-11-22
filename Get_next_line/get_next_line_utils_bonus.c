@@ -6,7 +6,7 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 19:25:55 by bgoron            #+#    #+#             */
-/*   Updated: 2023/11/20 17:53:43 by bgoron           ###   ########.fr       */
+/*   Updated: 2023/11/22 17:50:11 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ size_t	ft_strlen(char *s)
 	int	i;
 
 	i = 0;
-	if (!s)
-		return (0);
 	while (s[i])
 		i++;
 	return (i);
@@ -32,34 +30,23 @@ char	*ft_strjoin(char *s1, char *s2)
 
 	i = 0;
 	j = 0;
-	s3 = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
+	if (!s1 || !s2)
+		return (NULL);
+	s3 = ft_calloc((ft_strlen(s1) + ft_strlen(s2) + 1), sizeof(char));
 	if (s3 == NULL)
 		return (NULL);
-	while (s1 && s1[i] != '\0')
+	while (s1[i])
 	{
 		s3[i] = s1[i];
 		i++;
 	}
-	while (s2 && s2[j] != '\0')
+	while (s2[j])
 	{
 		s3[i + j] = s2[j];
 		j++;
 	}
 	free(s1);
-	s3[i + j] = '\0';
 	return (s3);
-}
-
-char	*ft_strchr(char *s, int c)
-{
-	size_t	i;
-
-	i = 0;
-	while (s[i] && s[i] != (unsigned char)c)
-		i++;
-	if ((unsigned char)c != '\0' && s[i] == '\0')
-		return (NULL);
-	return ((char *)(s + i));
 }
 
 void	*ft_calloc(size_t nmemb, size_t size)
@@ -69,7 +56,7 @@ void	*ft_calloc(size_t nmemb, size_t size)
 
 	i = 0;
 	if (nmemb == 0 || size == 0)
-		return (malloc(0));
+		return (malloc(1));
 	if (nmemb * size / size != nmemb)
 		return (NULL);
 	tab = malloc (nmemb * size);
@@ -83,27 +70,27 @@ void	*ft_calloc(size_t nmemb, size_t size)
 	return (tab);
 }
 
-char	*ft_substr(char *s, size_t start, size_t len)
+int	ft_isendline(char *str, char *buffer)
 {
-	char	*tab;
-	int		i;
+	size_t	i;
+	size_t	j;
 
 	i = 0;
-	if (!s)
-		return (NULL);
-	if (start >= ft_strlen(s))
-		len = 0;
-	else if (start + len > ft_strlen(s))
-		len = ft_strlen(s + start);
-	tab = ft_calloc(len + 1, sizeof(char));
-	if (!tab)
-		return (NULL);
-	while (len > 0)
-	{
-		tab[i] = s[i + start];
+	j = 0;
+	while (str[i] != '\n' && str[i])
 		i++;
-		len--;
+	if (str[i] == '\n')
+	{
+		i++;
+		while (str[i])
+		{
+			buffer[j] = str[i];
+			i++;
+			j++;
+		}
+		buffer[j] = '\0';
+		str[i - j] = '\0';
+		return (1);
 	}
-	tab[i] = '\0';
-	return (tab);
+	return (0);
 }

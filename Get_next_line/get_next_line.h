@@ -6,7 +6,7 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 19:25:32 by bgoron            #+#    #+#             */
-/*   Updated: 2023/11/20 17:52:08 by bgoron           ###   ########.fr       */
+/*   Updated: 2023/11/22 17:09:46 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define GET_NEXT_LINE_H
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 0
+#  define BUFFER_SIZE 1
 # endif
 
 # include <unistd.h>
@@ -23,12 +23,8 @@
 
 char	*get_next_line(int fd);
 char	*ft_strjoin(char *s1, char *s2);
-char	*ft_strchr(char *s, int c);
 size_t	ft_strlen(char *s);
 void	*ft_calloc(size_t nmemb, size_t size);
-char	*ft_substr(char *s, size_t start, size_t len);
-char	*readfile(int fd, char *line);
-char	*readedline(char *str1, char *str2);
-char	*restfile(char *str);
+int		ft_isendline(char *str, char *buffer);
 
 #endif
