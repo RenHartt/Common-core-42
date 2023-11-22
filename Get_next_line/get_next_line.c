@@ -58,7 +58,7 @@ char	*readfile(int fd, char *line)
 	char	*buffer;
 
 	r = 1;
-	buffer = ft_calloc(sizeof(char), (BUFFER_SIZE + 1));
+	buffer = ft_calloc((BUFFER_SIZE + 1), sizeof(char));
 	if (!buffer)
 		return (NULL);
 	while (!ft_strchr(buffer, '\n') && r != 0)
@@ -87,6 +87,8 @@ char	*get_next_line(int fd)
 		return (NULL);
 	tmp = readedline(line, tmp);
 	line = restfile(line);
+	if (tmp == NULL || line == NULL)
+		return (NULL);
 	if (!ft_strchr(tmp, '\n'))
 	{
 		free(line);
