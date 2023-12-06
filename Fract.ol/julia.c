@@ -3,42 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   julia.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
+/*   By: baptistegoron <baptistegoron@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 19:54:17 by bgoron            #+#    #+#             */
-/*   Updated: 2023/12/04 15:57:25 by bgoron           ###   ########.fr       */
+/*   Updated: 2023/12/05 22:04:22 by baptistegor      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-unsigned int	julia(int x, int y, double c_var)
+unsigned int	julia(int x, int y, double c_r, double c_i)
 {
 	int				i;
-	double			c_r;
-	double			c_i;
-	double			z_r;
-	double			z_i;
 	double			tmp;
 	unsigned int	color;
+	t_fractol		f;
 
 	i = 0;
-	c_r = cos(c_var); // entre -1 et 1
-	c_i = cos(c_var); // entre -1 et 1
-	z_r = map_fractal_x((double)x, -2, 2);
-	z_i = map_fractal_y((double)y, -2, 2);
-	while((z_r * z_r) + (z_i * z_i) < 4 && i < 50)
+	f.c_r = c_r;
+	f.c_i = c_i;
+	f.z_r = map_fractal_x((double)x, -2, 2);
+	f.z_i = map_fractal_y((double)y, -2, 2);
+	while((f.z_r * f.z_r) + (f.z_i * f.z_i) < 4 && i < 50)
 	{
-		tmp = z_r;
-		z_r = (z_r * z_r) - (z_i * z_i) + c_r;
-		z_i = 2 * tmp * z_i + c_i;
+		tmp = f.z_r;
+		f.z_r = (f.z_r * f.z_r) - (f.z_i * f.z_i) + f.c_r;
+		f.z_i = 2 * tmp * f.z_i + f.c_i;
 		i++;
 	}
 	if (i == 50)
 		return (0);
 	color = 0x000000020;
-	//color += ((int) map_color(i, iter) << 16);
-	//color += ((int) map_color(i, iter) % 255 << 8);
 	color += (int)map_color(i, 50);
 	return (color);
 }
