@@ -6,18 +6,21 @@
 #    By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/31 10:39:42 by bgoron            #+#    #+#              #
-#    Updated: 2023/12/04 16:02:12 by bgoron           ###   ########.fr        #
+#    Updated: 2023/12/06 20:23:30 by bgoron           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = fractol.a
+NAME = fractol
 CC = clang
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Werror -Wextra -g
 
-SRCS = fractol.c \
-	   mandelbrot.c \
-	   julia.c \
-	   utils.c \
+SRCS = ft_fractol.c \
+	   ft_utils.c \
+	   ft_map.c \
+	   ft_color.c \
+	   ft_hook.c \
+	   ft_set.c \
+	   ft_screen.c \
 
 OBJS = $(SRCS:.c=.o)
 
