@@ -6,7 +6,7 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 21:46:02 by bgoron            #+#    #+#             */
-/*   Updated: 2023/12/06 20:28:22 by bgoron           ###   ########.fr       */
+/*   Updated: 2023/12/07 12:33:24 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,12 @@
 int	main(int ac, char **av)
 {
 	t_fractol	*f;
-
+	
 	f = malloc(sizeof(t_fractol));
 	f->m = malloc(sizeof(t_data));
+	f->movex = 0;
+	f->movey = 0;
+	f->zoom = 1;
 	f->av = choose_fractal(av);
 	set_values(0, 0, f->av, f);
 	if (ac >= 2)
@@ -33,6 +36,7 @@ int	main(int ac, char **av)
 			f->c_i = ft_atof(av[3]);
 		}
 		mlx_mouse_hook(f->mlx_win, mouse_hook, f);
+		mlx_key_hook(f->mlx_win, key_hook, f);
 		mlx_loop_hook(f->mlx, loop_hook, f);
 		mlx_loop(f->mlx);
 	}

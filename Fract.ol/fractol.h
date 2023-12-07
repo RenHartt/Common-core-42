@@ -6,7 +6,7 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 21:46:07 by bgoron            #+#    #+#             */
-/*   Updated: 2023/12/06 20:49:23 by bgoron           ###   ########.fr       */
+/*   Updated: 2023/12/07 12:22:42 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ typedef struct s_fractol {
 	t_data	*m;
 	int		av;
 	int		leftclick;
+	double	movex;
+	double	movey;
 }				t_fractol;
 
 unsigned int	mandelbrot_julia(t_fractol f);
@@ -56,5 +58,6 @@ void			print_fractal(t_fractol *f);
 int				choose_fractal(char **av);
 void			set_values(int x, int y, int choice, t_fractol *f);
 int				mouse_hook(int button, int x, int y, t_fractol *f);
+int				key_hook(int button, t_fractol *f);
 
 #endif

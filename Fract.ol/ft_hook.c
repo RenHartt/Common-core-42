@@ -6,11 +6,24 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 20:13:09 by bgoron            #+#    #+#             */
-/*   Updated: 2023/12/06 20:50:35 by bgoron           ###   ########.fr       */
+/*   Updated: 2023/12/07 14:43:12 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+int	key_hook(int button, t_fractol *f)
+{
+	if (button == 65361) //fleche gauche
+		f->movex -= 10 / f->zoom;
+	if (button == 65363)//fleche gauche
+		f->movex += 10 / f->zoom;
+	if (button == 65362) //fleche haut
+		f->movey -= 10 / f->zoom;
+	if (button == 65364)//fleche bas
+		f->movey += 10 / f->zoom;
+	return (0);
+}
 
 int	mouse_hook(int button, int x, int y, t_fractol *f)
 {
@@ -18,10 +31,20 @@ int	mouse_hook(int button, int x, int y, t_fractol *f)
 	(void) y;
 	if (button == 1)
 		f->leftclick = !f->leftclick;
-	/*if (button == 4)
-		f->zoom += 1;
+	if (button == 4)
+	{
+		f->movex = ((double) (x / f->zoom + f->movex) - (x / (f->zoom * 1.1)));
+		f->movey = ((double) (y / f->zoom + f->movey) - (y / (f->zoom * 1.1)));
+		f->zoom *= 1.1;
+	}
 	if (button == 5)
-		f->zoom -= 1;*/
+	{
+		f->movex = ((double) (x / f->zoom + f->movex) - (x / (f->zoom / 1.1)));
+		f->movey = ((double) (y / f->zoom + f->movey) - (y / (f->zoom / 1.1)));
+		f->zoom /= 1.1;
+	}
+	print_fractal(f);
+	mlx_put_image_to_window(f->mlx, f->mlx_win, f->m->img, 0, 0);
 	return (0);
 }
 
