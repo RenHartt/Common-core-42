@@ -6,7 +6,7 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 20:21:07 by bgoron            #+#    #+#             */
-/*   Updated: 2023/12/07 14:30:37 by bgoron           ###   ########.fr       */
+/*   Updated: 2023/12/07 17:47:45 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	print_fractal(t_fractol *f)
 		while (x < W)
 		{
 			set_values(x, y, f->av, f);
-			color = mandelbrot_julia(*f);
+			color = mandelbrot_julia(f);
 			my_mlx_pixel_put((f->m), x, y, color);
 			x++;
 		}
