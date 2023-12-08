@@ -6,7 +6,7 @@
 #    By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/31 10:39:42 by bgoron            #+#    #+#              #
-#    Updated: 2023/12/07 17:14:00 by bgoron           ###   ########.fr        #
+#    Updated: 2023/12/07 23:49:37 by bgoron           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ SRCS = ft_fractol.c \
 	   ft_hook.c \
 	   ft_set.c \
 	   ft_screen.c \
+	   ft_input.c \
 
 OBJS = $(SRCS:.c=.o)
 

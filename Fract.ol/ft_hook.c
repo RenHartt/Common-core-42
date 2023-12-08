@@ -6,26 +6,29 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 20:13:09 by bgoron            #+#    #+#             */
-/*   Updated: 2023/12/07 23:06:58 by bgoron           ###   ########.fr       */
+/*   Updated: 2023/12/08 03:49:18 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
+#include "ft_fract_ol.h"
 
 int	key_hook(int button, t_fractol *f)
 {
-	if (button == 65361) //fleche gauche
+	if (button == 65361)
 		f->movex -= 10 / f->zoom;
-	if (button == 65363)//fleche gauche
+	if (button == 65363)
 		f->movex += 10 / f->zoom;
-	if (button == 65362) //fleche haut
+	if (button == 65362)
 		f->movey -= 10 / f->zoom;
-	if (button == 65364)//fleche bas
+	if (button == 65364)
 		f->movey += 10 / f->zoom;
-	if (button == 43) //+
-		f->iter += 10;
-	if (button == 45)//-
-		f->iter -= 10;
+	if (button == 65451)
+		f->iter += 1;
+	if (button == 65453)
+		f->iter -= 1;
+	if (button == 65307)
+		destroy(f);
+	print_fractal(f);
 	return (0);
 }
 
@@ -35,14 +38,14 @@ int	mouse_hook(int button, int x, int y, t_fractol *f)
 		f->leftclick = !f->leftclick;
 	if (button == 4)
 	{
-		f->movex = ((double)(x / f->zoom + f->movex) - (x / (f->zoom * 1.1)));
-		f->movey = ((double)(y / f->zoom + f->movey) - (y / (f->zoom * 1.1)));
+		f->movex = ((x / f->zoom + f->movex) - (x / (f->zoom * 1.1)));
+		f->movey = ((y / f->zoom + f->movey) - (y / (f->zoom * 1.1)));
 		f->zoom *= 1.1;
 	}
 	if (button == 5)
 	{
-		f->movex = ((double)(x / f->zoom + f->movex) - (x / (f->zoom / 1.1)));
-		f->movey = ((double)(y / f->zoom + f->movey) - (y / (f->zoom / 1.1)));
+		f->movex = ((x / f->zoom + f->movex) - (x / (f->zoom / 1.1)));
+		f->movey = ((y / f->zoom + f->movey) - (y / (f->zoom / 1.1)));
 		f->zoom /= 1.1;
 	}
 	print_fractal(f);
@@ -51,8 +54,8 @@ int	mouse_hook(int button, int x, int y, t_fractol *f)
 
 int	loop_hook(t_fractol *f)
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 
 	x = 0;
 	y = 0;

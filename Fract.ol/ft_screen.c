@@ -6,11 +6,11 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 20:21:07 by bgoron            #+#    #+#             */
-/*   Updated: 2023/12/07 18:59:17 by bgoron           ###   ########.fr       */
+/*   Updated: 2023/12/08 03:30:05 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
+#include "ft_fract_ol.h"
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, unsigned int color)
 {
@@ -33,7 +33,10 @@ void	print_fractal(t_fractol *f)
 		while (x < W)
 		{
 			set_values(x, y, f->av, f);
-			color = mandelbrot_julia(f);
+			if (f->av == 1 || f->av == 2)
+				color = mandelbrot_julia(f);
+			if (f->av == 3)
+				color = burning_ship(f);
 			my_mlx_pixel_put((f->m), x, y, color);
 			x++;
 		}
