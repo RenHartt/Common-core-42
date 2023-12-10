@@ -6,13 +6,13 @@
 #    By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/31 10:39:42 by bgoron            #+#    #+#              #
-#    Updated: 2023/12/07 23:49:37 by bgoron           ###   ########.fr        #
+#    Updated: 2023/12/09 20:57:14 by bgoron           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fractol
 CC = clang
-CFLAGS = -Wall -Werror -Wextra -g
+CFLAGS = -Wall -Werror -Wextra -I MacroLibX/includes -g
 
 SRCS = ft_fractol.c \
 	   ft_utils.c \
@@ -26,8 +26,7 @@ SRCS = ft_fractol.c \
 OBJS = $(SRCS:.c=.o)
 
 $(NAME): $(OBJS)
-	make --quiet -C ./minilibx-linux
-	$(CC) $(CFLAGS) $(OBJS) -Lminilibx-linux -lmlx_Linux -I./minilibx-linux -lXext -lX11 -lm -lz -o $@
+	$(CC) $(CFLAGS) $(OBJS) -o $@ ./MacroLibX/libmlx.so -lSDL2
 
 clean :
 	rm -rf $(OBJS)

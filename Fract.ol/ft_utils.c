@@ -6,7 +6,7 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 21:53:43 by bgoron            #+#    #+#             */
-/*   Updated: 2023/12/08 03:44:01 by bgoron           ###   ########.fr       */
+/*   Updated: 2023/12/10 17:18:29 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,17 +55,15 @@ double	ft_atof(char *nbr)
 	if (nbr[i] == '-')
 		i++;
 	while (nbr[i] >= '0' && nbr[i] <= '9')
-	{
-		result *= 10.0 + (nbr[i] - '0');
-		i++;
-	}
+		result = result * 10.0 + (nbr[i++] - '0');
 	if (nbr[i++] == '.')
+	{
 		while (nbr[i] >= '0' && nbr[i] <= '9')
 		{
 			fraction *= 0.1;
-			result += (nbr[i] - '0') * fraction;
-			i++;
+			result += (nbr[i++] - '0') * fraction;
 		}
+	}
 	if (nbr[0] == '-')
 		return (result * -1);
 	return (result);

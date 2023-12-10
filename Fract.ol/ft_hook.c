@@ -6,62 +6,90 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 20:13:09 by bgoron            #+#    #+#             */
-/*   Updated: 2023/12/08 03:49:18 by bgoron           ###   ########.fr       */
+/*   Updated: 2023/12/10 17:10:12 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_fract_ol.h"
+#include <stdio.h>
 
-int	key_hook(int button, t_fractol *f)
+int	key_hook(int keycode, void *fu)
 {
-	if (button == 65361)
+	t_fractol	*f;
+
+	f = (t_fractol *)fu;
+	if (keycode == RIGHT)
 		f->movex -= 10 / f->zoom;
-	if (button == 65363)
+	if (keycode == LEFT)
 		f->movex += 10 / f->zoom;
-	if (button == 65362)
+	if (keycode == UP)
 		f->movey -= 10 / f->zoom;
-	if (button == 65364)
+	if (keycode == DOWN)
 		f->movey += 10 / f->zoom;
-	if (button == 65451)
-		f->iter += 1;
-	if (button == 65453)
-		f->iter -= 1;
-	if (button == 65307)
-		destroy(f);
+	if (keycode == ITERP)
+		f->iter += 10;
+	if (keycode == ITERM)
+		f->iter -= 10;
+	if (keycode == PIXELP)
+		f->pixel++;
+	if (keycode == PIXELM && f->pixel > 1)
+		f->pixel--;
+	if (keycode == PIXELR)
+		f->pixel = 1;
+	if (keycode == ESCAP)
+		destroy(0, f);
 	print_fractal(f);
 	return (0);
 }
 
-int	mouse_hook(int button, int x, int y, t_fractol *f)
+int	wheel_hook(int keycode, void *fu)
 {
-	if (button == 1)
-		f->leftclick = !f->leftclick;
-	if (button == 4)
+	int			x;
+	int			y;
+	t_fractol	*f;
+
+	f = (t_fractol *)fu;
+	mlx_mouse_get_pos(f->mlx, &x, &y);
+	if (keycode == WUP)
 	{
 		f->movex = ((x / f->zoom + f->movex) - (x / (f->zoom * 1.1)));
 		f->movey = ((y / f->zoom + f->movey) - (y / (f->zoom * 1.1)));
 		f->zoom *= 1.1;
+		f->iter += 2;
+		print_fractal(f);
 	}
-	if (button == 5)
+	if (keycode == WDOWN)
 	{
 		f->movex = ((x / f->zoom + f->movex) - (x / (f->zoom / 1.1)));
 		f->movey = ((y / f->zoom + f->movey) - (y / (f->zoom / 1.1)));
 		f->zoom /= 1.1;
+		f->iter -= 2;
+		print_fractal(f);
 	}
+	return (0);
+}
+
+int	mouse_hook(int keycode, void *fu)
+{
+	t_fractol	*f;
+
+	f = (t_fractol *)fu;
+	if (keycode == 1)
+		f->leftclick = !f->leftclick;
 	print_fractal(f);
 	return (0);
 }
 
-int	loop_hook(t_fractol *f)
+int	loop_hook(void *fu)
 {
-	int	x;
-	int	y;
+	int			x;
+	int			y;
+	t_fractol	*f;
 
-	x = 0;
-	y = 0;
+	f = (t_fractol *)fu;
+	mlx_mouse_get_pos(f->mlx, &x, &y);
 	if (f->leftclick == 1)
 	{
-		mlx_mouse_get_pos(f->mlx, f->mlx_win, &x, &y);
 		f->c_r = map_fractal_x(x / f->zoom + f->movex, -2, 2);
 		f->c_i = map_fractal_y(y / f->zoom + f->movey, -2, 2);
 		print_fractal(f);

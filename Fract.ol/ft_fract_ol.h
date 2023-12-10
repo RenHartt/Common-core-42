@@ -6,34 +6,37 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 21:46:07 by bgoron            #+#    #+#             */
-/*   Updated: 2023/12/08 03:40:29 by bgoron           ###   ########.fr       */
+/*   Updated: 2023/12/10 19:30:33 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_FRACT_OL_H
-# define FT_FRACT_OL_H
+#ifndef FT_FRACTOL_H
+# define FT_FRACTOL_H
 
-# include "minilibx-linux/mlx.h"
+# include "mlx.h"
 # include <math.h>
-# include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
 
-# define W 960
-# define H 965
-
-typedef struct s_data {
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}				t_data;
+# define W 900
+# define H 900
+# define WUP 1
+# define WDOWN 2
+# define UP 82
+# define DOWN 81
+# define LEFT 79
+# define RIGHT 80
+# define ITERP 87
+# define ITERM 86
+# define PIXELP 46
+# define PIXELM 45
+# define PIXELR 21
+# define ESCAP 41
 
 typedef struct s_fractol {
-	t_data	*m;
 	void	*mlx;
 	void	*mlx_win;
+	void	*mlx_img;
 	double	c_r;
 	double	c_i;
 	double	z_r;
@@ -44,6 +47,11 @@ typedef struct s_fractol {
 	int		leftclick;
 	int		iter;
 	int		av;
+	int		color;
+	int		red;
+	int		green;
+	int		blue;
+	int		pixel;
 }				t_fractol;
 
 t_fractol		*init_fractol(int ac, char **av, int iter);
@@ -58,12 +66,13 @@ double			ft_atof(char *nbr);
 void			set_values(int x, int y, int choice, t_fractol *f);
 void			print_fractal(t_fractol *f);
 void			*ft_calloc(size_t nmemb, size_t size);
-void			error_input(void);
-int				mouse_hook(int button, int x, int y, t_fractol *f);
-int				key_hook(int button, t_fractol *f);
-int				loop_hook(t_fractol *f);
+int				error_input(int ac, char **av);
+int				mouse_hook(int keycode, void *fu);
+int				key_hook(int keycode, void *fu);
+int				wheel_hook(int keycode, void *fu);
+int				loop_hook(void *fu);
 int				ft_strcmp(char *s1, char *s2);
 int				choose_fractal(char **av);
-int				destroy(t_fractol *f);
+int				destroy(int keycode, void *fu);
 
 #endif

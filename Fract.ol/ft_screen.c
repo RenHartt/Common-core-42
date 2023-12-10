@@ -6,41 +6,37 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 20:21:07 by bgoron            #+#    #+#             */
-/*   Updated: 2023/12/08 03:30:05 by bgoron           ###   ########.fr       */
+/*   Updated: 2023/12/10 15:03:26 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_fract_ol.h"
 
-void	my_mlx_pixel_put(t_data *data, int x, int y, unsigned int color)
-{
-	char	*dst;
-
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*((unsigned int *)dst) = color;
-}
-
 void	print_fractal(t_fractol *f)
 {
-	unsigned int	color;
-	int				x;
-	int				y;
+	int					x;
+	int					y;
+	static unsigned int	lcolor[1920];
 
-	y = 0;
-	while (y < H)
+	y = -1;
+	while (++y < H)
 	{
-		x = 0;
-		while (x < W)
+		x = -1;
+		while (++x < W)
 		{
-			set_values(x, y, f->av, f);
-			if (f->av == 1 || f->av == 2)
-				color = mandelbrot_julia(f);
-			if (f->av == 3)
-				color = burning_ship(f);
-			my_mlx_pixel_put((f->m), x, y, color);
-			x++;
+			if (x % f->pixel == 0 && y % f->pixel == 0)
+			{
+				set_values(x, y, f->av, f);
+				if (f->av == 1 || f->av == 2)
+					f->color = mandelbrot_julia(f);
+				if (f->av == 3)
+					f->color = burning_ship(f);
+				mlx_pixel_put(f->mlx, f->mlx_win, x, y, f->color);
+				lcolor[x / f->pixel] = f->color;
+			}
+			else
+				mlx_pixel_put(f->mlx, f->mlx_win, x, y, lcolor[x / f->pixel]);
 		}
-		y++;
 	}
-	mlx_put_image_to_window(f->mlx, f->mlx_win, f->m->img, 0, 0);
+	mlx_put_image_to_window(f->mlx, f->mlx_win, f->mlx_img, 0, 0);
 }
