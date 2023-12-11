@@ -6,7 +6,7 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 21:46:07 by bgoron            #+#    #+#             */
-/*   Updated: 2023/12/11 18:23:29 by bgoron           ###   ########.fr       */
+/*   Updated: 2023/12/11 19:49:01 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,10 @@
 # include <math.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <stdio.h>
 
-# define W 900
-# define H 900
+# define W 800
+# define H 800
 # define LCLICK 1
 # define RCLICK 3
 # define WUP 1
@@ -33,6 +34,10 @@
 # define PIXELP 46
 # define PIXELM 45
 # define PIXELR 21
+# define CRP 96
+# define CRM 90
+# define CIP 94
+# define CIM 92
 # define ESCAP 41
 
 typedef struct s_color {
@@ -82,8 +87,8 @@ unsigned int	mandelbrot_julia(t_fractol *f);
 unsigned int	get_color(int i, t_fractol *f);
 
 double			map_color(int i, double min, double max);
-double			map_fractal_x(double a, double min, double max);
-double			map_fractal_y(double a, double min, double max);
+double			map_fract_x(double a, double min, double max);
+double			map_fract_y(double a, double min, double max);
 
 void			print_fractal(t_fractol *f);
 int				error_input(int ac, char **av);
@@ -91,6 +96,7 @@ int				destroy(int keycode, void *fu);
 
 int				loop_hook(void *fu);
 int				key_hook(int keycode, void *fu);
+int				key_hook2(int keycode, void *fu);
 int				mouse_hook(int keycode, void *fu);
 int				wheel_hook(int keycode, void *fu);
 

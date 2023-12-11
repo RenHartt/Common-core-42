@@ -6,7 +6,7 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 20:13:56 by bgoron            #+#    #+#             */
-/*   Updated: 2023/12/11 18:17:09 by bgoron           ###   ########.fr       */
+/*   Updated: 2023/12/11 19:23:03 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,25 @@
 
 void	set_values(int x, int y, int choice, t_fractol *f)
 {
+	double	s;
+
+	s = (double)W / (double)H;
 	if (choice == 1)
 	{
-		f->s->c_r = map_fractal_x(x / f->m->zoom + f->m->movx, -2.5, 1.5);
-		f->s->c_i = map_fractal_y(y / f->m->zoom + f->m->movy, -2, 2);
+		f->s->c_r = map_fract_x(x / f->m->zoom + f->m->movx, -2.5 * s, 1.5 * s);
+		f->s->c_i = map_fract_y(y / f->m->zoom + f->m->movy, -2, 2);
 		f->s->z_r = 0;
 		f->s->z_i = 0;
 	}
 	else if (choice == 2)
 	{
-		f->s->z_r = map_fractal_x(x / f->m->zoom + f->m->movx, -2, 2);
-		f->s->z_i = map_fractal_y(y / f->m->zoom + f->m->movy, -2, 2);
+		f->s->z_r = map_fract_x(x / f->m->zoom + f->m->movx, -2 * s, 2 * s);
+		f->s->z_i = map_fract_y(y / f->m->zoom + f->m->movy, -2, 2);
 	}
 	if (choice == 3)
 	{
-		f->s->c_r = map_fractal_x(x / f->m->zoom + f->m->movx, -2.5, 1.5);
-		f->s->c_i = map_fractal_y(y / f->m->zoom + f->m->movy, -2.5, 1.5);
+		f->s->c_r = map_fract_x(x / f->m->zoom + f->m->movx, -2.5 * s, 1.5 * s);
+		f->s->c_i = map_fract_y(y / f->m->zoom + f->m->movy, -2.5, 1.5);
 		f->s->z_r = 0;
 		f->s->z_i = 0;
 	}
