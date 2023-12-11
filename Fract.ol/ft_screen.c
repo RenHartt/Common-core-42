@@ -6,7 +6,7 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 20:21:07 by bgoron            #+#    #+#             */
-/*   Updated: 2023/12/11 17:01:25 by bgoron           ###   ########.fr       */
+/*   Updated: 2023/12/11 17:30:19 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,14 @@ void	print_fractal(t_fractol *f)
 					f->c->color = mandelbrot_julia(f);
 				if (f->s->av == 3)
 					f->c->color = burning_ship(f);
-				mlx_pixel_put(f->mlx, f->mlx_win, x, y, f->c->color);
+				mlx_pixel_put(f->mlx, f->win, x, y, f->c->color);
 				lcolor[x / f->m->pixel] = f->c->color;
 			}
 			else
-				mlx_pixel_put(f->mlx, f->mlx_win, x, y, lcolor[x / f->m->pixel]);
+				mlx_pixel_put(f->mlx, f->win, x, y, lcolor[x / f->m->pixel]);
 		}
 	}
-	mlx_put_image_to_window(f->mlx, f->mlx_win, f->mlx_img, 0, 0);
+	mlx_put_image_to_window(f->mlx, f->win, f->img, 0, 0);
 }
 
 int	destroy(int keycode, void *fu)
@@ -49,8 +49,8 @@ int	destroy(int keycode, void *fu)
 	if (keycode == 0)
 	{
 		mlx_loop_end(f->mlx);
-		mlx_destroy_image(f->mlx, f->mlx_img);
-		mlx_destroy_window(f->mlx, f->mlx_win);
+		mlx_destroy_image(f->mlx, f->img);
+		mlx_destroy_window(f->mlx, f->win);
 		mlx_destroy_display(f->mlx);
 		free(f->c);
 		free(f->s);

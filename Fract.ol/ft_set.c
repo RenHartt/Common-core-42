@@ -6,7 +6,7 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 20:13:56 by bgoron            #+#    #+#             */
-/*   Updated: 2023/12/11 17:01:18 by bgoron           ###   ########.fr       */
+/*   Updated: 2023/12/11 18:17:09 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,20 @@ void	set_values(int x, int y, int choice, t_fractol *f)
 {
 	if (choice == 1)
 	{
-		f->s->c_r = map_fractal_x(x / f->m->zoom + f->m->movex, -2.5, 1.5);
-		f->s->c_i = map_fractal_y(y / f->m->zoom + f->m->movey, -2, 2);
+		f->s->c_r = map_fractal_x(x / f->m->zoom + f->m->movx, -2.5, 1.5);
+		f->s->c_i = map_fractal_y(y / f->m->zoom + f->m->movy, -2, 2);
 		f->s->z_r = 0;
 		f->s->z_i = 0;
 	}
 	else if (choice == 2)
 	{
-		f->s->z_r = map_fractal_x(x / f->m->zoom + f->m->movex, -2, 2);
-		f->s->z_i = map_fractal_y(y / f->m->zoom + f->m->movey, -2, 2);
+		f->s->z_r = map_fractal_x(x / f->m->zoom + f->m->movx, -2, 2);
+		f->s->z_i = map_fractal_y(y / f->m->zoom + f->m->movy, -2, 2);
 	}
 	if (choice == 3)
 	{
-		f->s->c_r = map_fractal_x(x / f->m->zoom + f->m->movex, -2.5, 1.5);
-		f->s->c_i = map_fractal_y(y / f->m->zoom + f->m->movey, -2.5, 1.5);
+		f->s->c_r = map_fractal_x(x / f->m->zoom + f->m->movx, -2.5, 1.5);
+		f->s->c_i = map_fractal_y(y / f->m->zoom + f->m->movy, -2.5, 1.5);
 		f->s->z_r = 0;
 		f->s->z_i = 0;
 	}
@@ -40,11 +40,14 @@ t_fractol	*init_fractol(int ac, char **av, int iter)
 	t_fractol	*f;
 
 	f = ft_calloc(1, sizeof(t_fractol));
-	f->c = ft_calloc(1, sizeof(t_color));
 	f->s = ft_calloc(1, sizeof(t_set));
 	f->m = ft_calloc(1, sizeof(t_move));
+	f->c = ft_calloc(1, sizeof(t_color));
+	f->iter = iter;
 	f->m->zoom = 1;
 	f->m->pixel = 1;
+	f->leftclick = 0;
+	f->rightclick = 0;
 	f->s->av = choose_fractal(av);
 	set_values(0, 0, f->s->av, f);
 	if (ac >= 2)
@@ -55,11 +58,9 @@ t_fractol	*init_fractol(int ac, char **av, int iter)
 			f->s->c_i = ft_atof(av[3]);
 		}
 		f->mlx = mlx_init();
-		f->mlx_win = mlx_new_window(f->mlx, W, H, "Fract.ol");
-		f->mlx_img = mlx_new_image(f->mlx, W, H);
+		f->win = mlx_new_window(f->mlx, W, H, "Fract.ol");
+		f->img = mlx_new_image(f->mlx, W, H);
 	}
-	f->leftclick = 0;
-	f->iter = iter;
 	return (f);
 }
 
@@ -69,10 +70,12 @@ unsigned int	mandelbrot_julia(t_fractol *f)
 	double	tmp;
 
 	i = 0;
-	while (((f->s->z_r * f->s->z_r) + (f->s->z_i * f->s->z_i) < 4 && i < f->iter))
+	while (((f->s->z_r * f->s->z_r) + (f->s->z_i * f->s->z_i) < 4 \
+	&& i < f->iter))
 	{
 		tmp = f->s->z_r;
-		f->s->z_r = (f->s->z_r * f->s->z_r) - (f->s->z_i * f->s->z_i) + f->s->c_r;
+		f->s->z_r = (f->s->z_r * f->s->z_r) - (f->s->z_i * f->s->z_i) \
+		+ f->s->c_r;
 		f->s->z_i = 2 * tmp * f->s->z_i + f->s->c_i;
 		i++;
 	}
@@ -87,10 +90,12 @@ unsigned int	burning_ship(t_fractol *f)
 	double	tmp;
 
 	i = 0;
-	while (((f->s->z_r * f->s->z_r) + (f->s->z_i * f->s->z_i) < 4 && i < f->iter))
+	while (((f->s->z_r * f->s->z_r) + (f->s->z_i * f->s->z_i) < 4 \
+	&& i < f->iter))
 	{
 		tmp = f->s->z_r;
-		f->s->z_r = (f->s->z_r * f->s->z_r) - (f->s->z_i * f->s->z_i) + f->s->c_r;
+		f->s->z_r = (f->s->z_r * f->s->z_r) - (f->s->z_i * f->s->z_i) \
+		+ f->s->c_r;
 		f->s->z_i = 2 * fabs(tmp * f->s->z_i) + f->s->c_i;
 		i++;
 	}

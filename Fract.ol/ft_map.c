@@ -6,31 +6,30 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 20:11:18 by bgoron            #+#    #+#             */
-/*   Updated: 2023/12/11 14:21:13 by bgoron           ###   ########.fr       */
+/*   Updated: 2023/12/11 18:10:14 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_fract_ol.h"
 
-double	map_fractal_x(double a, double minb, double maxb)
+double	map_fractal_x(double a, double min, double max)
 {
-	return (minb + a * ((maxb - minb) / W));
+	return (a * ((max - min) / W) + min);
 }
 
-double	map_fractal_y(double a, double minb, double maxb)
+double	map_fractal_y(double a, double min, double max)
 {
-	return (minb + a * ((maxb - minb) / H));
+	return (a * ((max - min) / H) + min);
 }
 
-double	map_color(int i, int max, double minb, double maxb)
+double	map_color(int i, double min, double max)
 {
-	int rpt;
-	int mod;
+	int	iter;
+	int	mod;
 
-	(void)max;
-	rpt = 50;
-	mod = rpt / 2;
-	if (i % rpt > mod - 1)
-		return (minb + (maxb - minb) * ((double)(mod - (i % mod)) / mod));
-	return (minb + (maxb - minb) * ((double)(i % mod) / mod));
+	iter = 100;
+	mod = iter / 2;
+	if (i % iter > mod - 1)
+		return (min + (max - min) * ((double)(mod - (i % mod)) / mod));
+	return (min + (max - min) * ((double)(i % mod) / mod));
 }

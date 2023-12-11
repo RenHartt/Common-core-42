@@ -6,7 +6,7 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 21:46:07 by bgoron            #+#    #+#             */
-/*   Updated: 2023/12/11 17:00:08 by bgoron           ###   ########.fr       */
+/*   Updated: 2023/12/11 18:23:29 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 
 # define W 900
 # define H 900
+# define LCLICK 1
+# define RCLICK 3
 # define WUP 1
 # define WDOWN 2
 # define UP 82
@@ -41,6 +43,7 @@ typedef struct s_color {
 	int		red2;
 	int		green2;
 	int		blue2;
+	int		shift;
 }				t_color;
 
 typedef struct s_set {
@@ -53,8 +56,8 @@ typedef struct s_set {
 
 typedef struct s_move {
 	double	zoom;
-	double	movex;
-	double	movey;
+	double	movx;
+	double	movy;
 	int		pixel;
 }				t_move;
 
@@ -63,9 +66,10 @@ typedef struct s_fractol {
 	t_set	*s;
 	t_move	*m;
 	void	*mlx;
-	void	*mlx_win;
-	void	*mlx_img;
+	void	*win;
+	void	*img;
 	int		leftclick;
+	int		rightclick;
 	int		iter;
 }				t_fractol;
 
@@ -77,20 +81,21 @@ unsigned int	burning_ship(t_fractol *f);
 unsigned int	mandelbrot_julia(t_fractol *f);
 unsigned int	get_color(int i, t_fractol *f);
 
-double			map_fractal_x(double a, double minb, double maxb);
-double			map_fractal_y(double a, double minb, double maxb);
-double			map_color(int i, int max, double minb, double maxb);
+double			map_color(int i, double min, double max);
+double			map_fractal_x(double a, double min, double max);
+double			map_fractal_y(double a, double min, double max);
 
 void			print_fractal(t_fractol *f);
+int				error_input(int ac, char **av);
+int				destroy(int keycode, void *fu);
 
 int				loop_hook(void *fu);
 int				key_hook(int keycode, void *fu);
 int				mouse_hook(int keycode, void *fu);
 int				wheel_hook(int keycode, void *fu);
 
-int				error_input(int ac, char **av);
-int				destroy(int keycode, void *fu);
-
+void			ft_putchar(char c);
+int				ft_putstr(char *s);
 double			ft_atof(char *nbr);
 int				ft_strcmp(char *s1, char *s2);
 void			*ft_calloc(size_t nmemb, size_t size);

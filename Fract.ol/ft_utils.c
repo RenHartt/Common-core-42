@@ -6,11 +6,29 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 21:53:43 by bgoron            #+#    #+#             */
-/*   Updated: 2023/12/11 13:44:19 by bgoron           ###   ########.fr       */
+/*   Updated: 2023/12/11 17:38:26 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_fract_ol.h"
+
+void	ft_putchar(char c)
+{
+	write(1, &c, 1);
+}
+
+int	ft_putstr(char *s)
+{
+	size_t	i;
+
+	i = 0;
+	while (s[i])
+	{
+		ft_putchar(s[i]);
+		i++;
+	}
+	return (i);
+}
 
 int	ft_strcmp(char *s1, char *s2)
 {
