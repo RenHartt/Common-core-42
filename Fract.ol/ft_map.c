@@ -6,7 +6,7 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 20:11:18 by bgoron            #+#    #+#             */
-/*   Updated: 2023/12/08 00:10:23 by bgoron           ###   ########.fr       */
+/*   Updated: 2023/12/11 14:21:13 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,15 @@ double	map_fractal_y(double a, double minb, double maxb)
 	return (minb + a * ((maxb - minb) / H));
 }
 
-double	map_color(double i, double max)
+double	map_color(int i, int max, double minb, double maxb)
 {
-	return (i * 255 / max);
+	int rpt;
+	int mod;
+
+	(void)max;
+	rpt = 50;
+	mod = rpt / 2;
+	if (i % rpt > mod - 1)
+		return (minb + (maxb - minb) * ((double)(mod - (i % mod)) / mod));
+	return (minb + (maxb - minb) * ((double)(i % mod) / mod));
 }

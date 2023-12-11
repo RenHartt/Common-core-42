@@ -6,7 +6,7 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 21:46:02 by bgoron            #+#    #+#             */
-/*   Updated: 2023/12/10 19:32:50 by bgoron           ###   ########.fr       */
+/*   Updated: 2023/12/11 16:18:40 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ int	main(int ac, char **av)
 	{
 		f = init_fractol(ac, av, 100);
 		print_fractal(f);
-		mlx_on_event(f->mlx, f->mlx_win, 5, &destroy, f);
-		mlx_on_event(f->mlx, f->mlx_win, 4, &wheel_hook, f);
-		mlx_on_event(f->mlx, f->mlx_win, 2, &mouse_hook, f);
 		mlx_on_event(f->mlx, f->mlx_win, 0, &key_hook, f);
+		mlx_on_event(f->mlx, f->mlx_win, 2, &mouse_hook, f);
+		mlx_on_event(f->mlx, f->mlx_win, 4, &wheel_hook, f);
+		mlx_on_event(f->mlx, f->mlx_win, 5, &destroy, f);
 		mlx_loop_hook(f->mlx, &loop_hook, f);
 		mlx_loop(f->mlx);
 	}

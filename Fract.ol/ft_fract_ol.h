@@ -6,7 +6,7 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 21:46:07 by bgoron            #+#    #+#             */
-/*   Updated: 2023/12/10 19:30:33 by bgoron           ###   ########.fr       */
+/*   Updated: 2023/12/11 17:00:08 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,46 +33,66 @@
 # define PIXELR 21
 # define ESCAP 41
 
-typedef struct s_fractol {
-	void	*mlx;
-	void	*mlx_win;
-	void	*mlx_img;
+typedef struct s_color {
+	int		color;
+	int		red1;
+	int		green1;
+	int		blue1;
+	int		red2;
+	int		green2;
+	int		blue2;
+}				t_color;
+
+typedef struct s_set {
 	double	c_r;
 	double	c_i;
 	double	z_r;
 	double	z_i;
+	int		av;
+}				t_set;
+
+typedef struct s_move {
+	double	zoom;
 	double	movex;
 	double	movey;
-	double	zoom;
+	int		pixel;
+}				t_move;
+
+typedef struct s_fractol {
+	t_color	*c;
+	t_set	*s;
+	t_move	*m;
+	void	*mlx;
+	void	*mlx_win;
+	void	*mlx_img;
 	int		leftclick;
 	int		iter;
-	int		av;
-	int		color;
-	int		red;
-	int		green;
-	int		blue;
-	int		pixel;
 }				t_fractol;
 
+int				choose_fractal(char **av);
 t_fractol		*init_fractol(int ac, char **av, int iter);
-unsigned int	mandelbrot_julia(t_fractol *f);
+void			set_values(int x, int y, int choice, t_fractol *f);
+
 unsigned int	burning_ship(t_fractol *f);
+unsigned int	mandelbrot_julia(t_fractol *f);
 unsigned int	get_color(int i, t_fractol *f);
+
 double			map_fractal_x(double a, double minb, double maxb);
 double			map_fractal_y(double a, double minb, double maxb);
-double			map_color(double i, double max);
-double			lissage(int i, t_fractol *f, int m);
-double			ft_atof(char *nbr);
-void			set_values(int x, int y, int choice, t_fractol *f);
+double			map_color(int i, int max, double minb, double maxb);
+
 void			print_fractal(t_fractol *f);
-void			*ft_calloc(size_t nmemb, size_t size);
-int				error_input(int ac, char **av);
-int				mouse_hook(int keycode, void *fu);
-int				key_hook(int keycode, void *fu);
-int				wheel_hook(int keycode, void *fu);
+
 int				loop_hook(void *fu);
-int				ft_strcmp(char *s1, char *s2);
-int				choose_fractal(char **av);
+int				key_hook(int keycode, void *fu);
+int				mouse_hook(int keycode, void *fu);
+int				wheel_hook(int keycode, void *fu);
+
+int				error_input(int ac, char **av);
 int				destroy(int keycode, void *fu);
+
+double			ft_atof(char *nbr);
+int				ft_strcmp(char *s1, char *s2);
+void			*ft_calloc(size_t nmemb, size_t size);
 
 #endif
