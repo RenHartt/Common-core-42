@@ -6,7 +6,7 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 20:13:09 by bgoron            #+#    #+#             */
-/*   Updated: 2023/12/11 19:51:58 by bgoron           ###   ########.fr       */
+/*   Updated: 2023/12/13 14:13:18 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,18 +40,15 @@ int	key_hook(int keycode, void *fu)
 	key_hook2(keycode, f);
 	return (0);
 }
+
 int	key_hook2(int keycode, void *fu)
 {
 	t_fractol	*f;
 
 	f = (t_fractol *)fu;
-	if (keycode == CRP)
+	if (keycode == CP)
 		f->s->c_r += 0.001;
-	if (keycode == CRM)
-		f->s->c_r -= 0.001;
-	if (keycode == CIP)
-		f->s->c_r += 0.001;
-	if (keycode == CIM)
+	if (keycode == CM)
 		f->s->c_r -= 0.001;
 	print_fractal(f);
 	return (0);
@@ -108,9 +105,7 @@ int	loop_hook(void *fu)
 		f->s->c_i = map_fract_y(y / f->m->zoom + f->m->movy, -2, 2);
 	}
 	if (f->rightclick)
-	{
 		f->c->shift = (f->c->shift + 1) % f->iter;
-	}
 	print_fractal(f);
 	return (0);
 }

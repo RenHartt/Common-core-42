@@ -6,7 +6,7 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 20:13:56 by bgoron            #+#    #+#             */
-/*   Updated: 2023/12/11 19:23:03 by bgoron           ###   ########.fr       */
+/*   Updated: 2023/12/13 16:37:40 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,15 +71,17 @@ unsigned int	mandelbrot_julia(t_fractol *f)
 {
 	int		i;
 	double	tmp;
+	double	z_r;
+	double	z_i;
 
 	i = 0;
-	while (((f->s->z_r * f->s->z_r) + (f->s->z_i * f->s->z_i) < 4 \
-	&& i < f->iter))
+	z_r = f->s->z_r;
+	z_i = f->s->z_i;
+	while (((z_r * z_r) + (z_i * z_i) < 4 && i < f->iter))
 	{
-		tmp = f->s->z_r;
-		f->s->z_r = (f->s->z_r * f->s->z_r) - (f->s->z_i * f->s->z_i) \
-		+ f->s->c_r;
-		f->s->z_i = 2 * tmp * f->s->z_i + f->s->c_i;
+		tmp = z_r;
+		z_r = (z_r * z_r) - (z_i * z_i) + f->s->c_r;
+		z_i = 2 * tmp * z_i + f->s->c_i;
 		i++;
 	}
 	if (i == f->iter)
@@ -91,15 +93,17 @@ unsigned int	burning_ship(t_fractol *f)
 {
 	int		i;
 	double	tmp;
+	double	z_r;
+	double	z_i;
 
 	i = 0;
-	while (((f->s->z_r * f->s->z_r) + (f->s->z_i * f->s->z_i) < 4 \
-	&& i < f->iter))
+	z_r = f->s->z_r;
+	z_i = f->s->z_i;
+	while (((z_r * z_r) + (z_i * z_i) < 4 && i < f->iter))
 	{
-		tmp = f->s->z_r;
-		f->s->z_r = (f->s->z_r * f->s->z_r) - (f->s->z_i * f->s->z_i) \
-		+ f->s->c_r;
-		f->s->z_i = 2 * fabs(tmp * f->s->z_i) + f->s->c_i;
+		tmp = z_r;
+		z_r = (z_r * z_r) - (z_i * z_i) + f->s->c_r;
+		z_i = 2 * fabs(tmp * z_i) + f->s->c_i;
 		i++;
 	}
 	if (i == f->iter)

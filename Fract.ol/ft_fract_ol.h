@@ -6,7 +6,7 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 21:46:07 by bgoron            #+#    #+#             */
-/*   Updated: 2023/12/11 19:49:01 by bgoron           ###   ########.fr       */
+/*   Updated: 2023/12/13 16:38:12 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,9 @@
 # include <math.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include <stdio.h>
 
 # define W 800
-# define H 800
+# define H 700
 # define LCLICK 1
 # define RCLICK 3
 # define WUP 1
@@ -34,10 +33,8 @@
 # define PIXELP 46
 # define PIXELM 45
 # define PIXELR 21
-# define CRP 96
-# define CRM 90
-# define CIP 94
-# define CIM 92
+# define CP 96
+# define CM 90
 # define ESCAP 41
 
 typedef struct s_color {

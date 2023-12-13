@@ -6,7 +6,7 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 20:12:19 by bgoron            #+#    #+#             */
-/*   Updated: 2023/12/11 18:52:35 by bgoron           ###   ########.fr       */
+/*   Updated: 2023/12/12 18:56:32 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ unsigned int	get_color(int i, t_fractol *f)
 	int	endcolor;
 	int	gradient;
 
-	i = i + f->c->shift % f->iter;
+	i += f->c->shift % f->iter;
 	begincolor = 0xFF002FA7;
 	f->c->red1 = (begincolor >> 16) & 255;
 	f->c->green1 = (begincolor >> 8) & 255;
