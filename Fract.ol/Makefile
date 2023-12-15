@@ -12,7 +12,7 @@
 
 NAME = fractol
 CC = clang
-CFLAGS = -Wall -Werror -Wextra -I MacroLibX/includes
+CFLAGS = -Wall -Werror -Wextra -I MacroLibX/includes -O3
 
 SRCS = ft_fractol.c \
 	   ft_utils.c \
