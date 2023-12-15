@@ -6,7 +6,7 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 20:13:56 by bgoron            #+#    #+#             */
-/*   Updated: 2023/12/13 16:37:40 by bgoron           ###   ########.fr       */
+/*   Updated: 2023/12/14 21:22:47 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ t_fractol	*init_fractol(int ac, char **av, int iter)
 	f->c = ft_calloc(1, sizeof(t_color));
 	f->iter = iter;
 	f->m->zoom = 1;
-	f->m->pixel = 1;
+	f->m->pix = 1;
 	f->leftclick = 0;
 	f->rightclick = 0;
 	f->s->av = choose_fractal(av);

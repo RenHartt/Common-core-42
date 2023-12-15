@@ -6,7 +6,7 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 20:13:09 by bgoron            #+#    #+#             */
-/*   Updated: 2023/12/13 14:13:18 by bgoron           ###   ########.fr       */
+/*   Updated: 2023/12/15 15:07:44 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,11 @@ int	key_hook(int keycode, void *fu)
 	if (keycode == ITERM)
 		f->iter -= 10;
 	if (keycode == PIXELP)
-		f->m->pixel++;
-	if (keycode == PIXELM && f->m->pixel > 1)
-		f->m->pixel--;
+		f->m->pix++;
+	if (keycode == PIXELM && f->m->pix > 1)
+		f->m->pix--;
 	if (keycode == PIXELR)
-		f->m->pixel = 1;
+		f->m->pix = 1;
 	if (keycode == ESCAP)
 		destroy(0, f);
 	key_hook2(keycode, f);

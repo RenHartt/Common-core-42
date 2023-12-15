@@ -6,12 +6,12 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 21:46:07 by bgoron            #+#    #+#             */
-/*   Updated: 2023/12/13 16:38:12 by bgoron           ###   ########.fr       */
+/*   Updated: 2023/12/14 21:22:00 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_FRACTOL_H
-# define FT_FRACTOL_H
+#ifndef FT_FRACT_OL_H
+# define FT_FRACT_OL_H
 
 # include "mlx.h"
 # include <math.h>
@@ -60,7 +60,7 @@ typedef struct s_move {
 	double	zoom;
 	double	movx;
 	double	movy;
-	int		pixel;
+	int		pix;
 }				t_move;
 
 typedef struct s_fractol {
