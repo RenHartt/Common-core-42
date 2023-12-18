@@ -6,7 +6,7 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 19:45:30 by bgoron            #+#    #+#             */
-/*   Updated: 2023/12/18 15:22:57 by bgoron           ###   ########.fr       */
+/*   Updated: 2023/12/18 21:15:56 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,12 @@ void	ft_sort_three(t_stack **a)
 	}
 }
 
-void	ft_sort(t_stack **a, t_stack **b)
+void	ft_a_to_b(t_stack **a, t_stack **b)
 {
 	int min;
 	int max;
 	int	median;
-	while ((*a)->next)
+	while (*a)
 	{
 		min = ft_lstsize(*a) / 2;
 		max = ft_lstsize(*a);
@@ -47,6 +47,9 @@ void	ft_sort(t_stack **a, t_stack **b)
 				ft_ra(a);
 		}
 	}
+}
+void	ft_b_to_a(t_stack **a, t_stack **b)
+{
 	while (*b)
 	{
 		if (ft_find_index(*b, ft_lstfind_max(*b)) > ft_lstsize(*b) / 2)

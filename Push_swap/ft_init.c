@@ -6,7 +6,7 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 16:11:23 by bgoron            #+#    #+#             */
-/*   Updated: 2023/12/18 13:33:40 by bgoron           ###   ########.fr       */
+/*   Updated: 2023/12/18 19:40:09 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,15 @@ t_stack	*ft_lstnew(int nbr)
 void	ft_lstadd_back(t_stack *list, int nbr)
 {
 	t_stack	*new;
-	t_stack	*current;
 
 	new = malloc(sizeof(t_stack));
 	if (!new || !list)
 		exit(EXIT_FAILURE);
 	new->nbr = nbr;
 	new->next = NULL;
-	current = list;
-	while (current->next)
-		current = current->next;
-	current->next = new;
+	while (list->next)
+		list = list->next;
+	list->next = new;
 }
 
 void	ft_lstadd_front(t_stack *list, int nbr)

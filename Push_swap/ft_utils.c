@@ -6,11 +6,20 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 20:19:17 by bgoron            #+#    #+#             */
-/*   Updated: 2023/12/18 14:22:21 by bgoron           ###   ########.fr       */
+/*   Updated: 2023/12/18 20:59:21 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pushswap.h"
+
+int	ft_lstlast(t_stack *a)
+{
+	if (!a)
+		return (0);
+	while (a)
+		a = a->next;
+	return (a->nbr);
+}
 
 int	ft_lstfind_min(t_stack *a)
 {
@@ -38,31 +47,6 @@ int	ft_lstfind_max(t_stack *a)
 		a = a->next;
 	}
 	return (max);
-}
-
-int	ft_median(int *tab, int size)
-{
-	int	i;
-	int	j;
-	int	tmp;
-
-	i = 0;
-	while (i < size)
-	{
-		j = i + 1;
-		while (j < size)
-		{
-			if (tab[j] < tab[i])
-			{
-				tmp = tab[j];
-				tab[j] = tab[i];
-				tab[i] = tmp;
-			}
-			j++;
-		}
-		i++;
-	}
-	return (tab[size / 2]);
 }
 
 int	ft_lstsize(t_stack *a)
@@ -102,4 +86,69 @@ int	ft_find_index(t_stack *a, int nbr)
 		i++;
 	}
 	return (0);
+}
+
+int	ft_find_final_index(t_stack *a, int nbr)
+{
+	int i;
+
+	i = 1;
+	
+	while (a)
+	{
+		if (a->nbr < nbr)
+			i++;
+		a = a->next;
+	}
+	return (i);
+}
+
+void	ft_set_nbr_to_index(t_stack *a)
+{
+	t_stack	*tmp;
+
+	tmp = a;
+	while (a)
+	{
+		a->nbr = ft_find_final_index(tmp, a->nbr);
+		a = a->next;
+	}
+}
+
+int	ft_cost_a(t_stack *a, int nbr, int *move)
+{
+	int cost;
+
+	if (a->nbr > nbr && ft_lstlast(a) < nbr)
+		return (NULL);
+	while (!(a->nbr > nbr && ft_lstlast(a) < nbr))
+		a = a->next;
+	if (ft_find_index(a, nbr) > ft_lstsize(a) / 2)
+	{
+		cost = ft_lstsize(a) - ft_find_index(a, nbr);
+		*move = 1;
+	}
+	else
+	{
+		cost = ft_find_index(a, nbr);
+		*move = 0;
+	}
+	return (cost);
+}
+
+int	ft_cost_b(t_stack *b, int *move)
+{
+	int cost;
+
+	if (ft_find_index(b, b->nbr) > ft_lstsize(b) / 2)
+	{
+		cost = ft_lstsize(b) - ft_find_index(b, b->nbr);
+		*move = 1;
+	}
+	else
+	{
+		cost = ft_find_index(b, b->nbr);
+		*move = 0;
+	}
+	return (cost);
 }
