@@ -6,7 +6,7 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 20:33:34 by bgoron            #+#    #+#             */
-/*   Updated: 2023/12/18 19:35:11 by bgoron           ###   ########.fr       */
+/*   Updated: 2023/12/19 18:57:42 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,15 @@ int	main(void)
 	for (i = 1; i < 500; i++)
 		ft_lstadd_back(a, tab[i]);
 	ft_set_nbr_to_index(a);
-	printf("a = ");
-	ft_lstprint(a);
-	printf("b = ");
-	ft_lstprint(b);
+	//printf("a = ");
+	//ft_lstprint(a);
+	//printf("b = ");
+	//ft_lstprint(b);
 	ft_a_to_b(&a, &b);
 	ft_b_to_a(&a, &b);
-	printf("a = ");
-	ft_lstprint(a);
-	printf("b = ");
-	ft_lstprint(b);
+	//printf("a = ");
+	//ft_lstprint(a);
+	//printf("b = ");
+	//ft_lstprint(b);
 	return (0);
 }

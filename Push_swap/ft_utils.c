@@ -6,7 +6,7 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 20:19:17 by bgoron            #+#    #+#             */
-/*   Updated: 2023/12/18 20:59:21 by bgoron           ###   ########.fr       */
+/*   Updated: 2023/12/19 17:33:45 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	ft_lstlast(t_stack *a)
 {
 	if (!a)
 		return (0);
-	while (a)
+	while (a->next)
 		a = a->next;
 	return (a->nbr);
 }
@@ -117,21 +117,25 @@ void	ft_set_nbr_to_index(t_stack *a)
 
 int	ft_cost_a(t_stack *a, int nbr, int *move)
 {
-	int cost;
+	static t_stack	*tmp;
+	int				cost;
+	int				min;
+	int				max;
 
-	if (a->nbr > nbr && ft_lstlast(a) < nbr)
-		return (NULL);
+	tmp = a;
+	*move = 1;
+	min = ft_lstfind_min(a);
+	max = ft_lstfind_max(a);
+	if (nbr > max || nbr < min)
+		return (ft_find_index(a, min));
 	while (!(a->nbr > nbr && ft_lstlast(a) < nbr))
 		a = a->next;
-	if (ft_find_index(a, nbr) > ft_lstsize(a) / 2)
-	{
-		cost = ft_lstsize(a) - ft_find_index(a, nbr);
-		*move = 1;
-	}
+	if (ft_find_index(tmp, nbr) > ft_lstsize(tmp) / 2)
+		cost = ft_lstsize(tmp) - ft_find_index(tmp, nbr);
 	else
 	{
-		cost = ft_find_index(a, nbr);
-		*move = 0;
+		cost = ft_find_index(tmp, nbr);
+		*move = -1;
 	}
 	return (cost);
 }
@@ -140,15 +144,13 @@ int	ft_cost_b(t_stack *b, int *move)
 {
 	int cost;
 
+	*move = 1;
 	if (ft_find_index(b, b->nbr) > ft_lstsize(b) / 2)
-	{
 		cost = ft_lstsize(b) - ft_find_index(b, b->nbr);
-		*move = 1;
-	}
 	else
 	{
 		cost = ft_find_index(b, b->nbr);
-		*move = 0;
+		*move = -1;
 	}
 	return (cost);
 }
