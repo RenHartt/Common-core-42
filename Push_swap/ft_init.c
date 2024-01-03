@@ -6,7 +6,7 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 16:11:23 by bgoron            #+#    #+#             */
-/*   Updated: 2023/12/18 19:40:09 by bgoron           ###   ########.fr       */
+/*   Updated: 2024/01/03 15:25:23 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,19 +64,4 @@ void	ft_lstfree(t_stack *list)
 		current = tmp;
 	}
 	free(list);
-}
-
-void	ft_lstprint(t_stack *list)
-{
-	t_stack	*current;
-
-	current = list;
-	while (current)
-	{
-		printf("%d", current->nbr);
-		if (current->next)
-			printf(" -> ");
-		current = current->next;
-	}
-	printf("\n");
 }
