@@ -6,7 +6,7 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 19:45:30 by bgoron            #+#    #+#             */
-/*   Updated: 2024/01/03 15:39:45 by bgoron           ###   ########.fr       */
+/*   Updated: 2024/01/06 16:45:46 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	ft_a_to_b(t_stack **a, t_stack **b)
 			if ((*a)->nbr > min)
 			{
 				ft_pb(a, b);
-				if ((*b)->nbr < median)
+				if (((*b)->nbr < median) && (ft_lstsize(*b) > 1))
 					ft_rb(b);
 			}
 			else
@@ -55,3 +55,4 @@ void	ft_b_to_a(t_stack **a, t_stack **b)
 		}
 	}
 }
+

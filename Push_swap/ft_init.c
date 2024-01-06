@@ -6,7 +6,7 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 16:11:23 by bgoron            #+#    #+#             */
-/*   Updated: 2024/01/03 15:25:23 by bgoron           ###   ########.fr       */
+/*   Updated: 2024/01/06 18:57:40 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,31 +24,18 @@ t_stack	*ft_lstnew(int nbr)
 	return (new);
 }
 
-
 void	ft_lstadd_back(t_stack *list, int nbr)
 {
 	t_stack	*new;
 
 	new = malloc(sizeof(t_stack));
-	if (!new || !list)
+	if (!new)
 		exit(EXIT_FAILURE);
 	new->nbr = nbr;
 	new->next = NULL;
 	while (list->next)
 		list = list->next;
 	list->next = new;
-}
-
-void	ft_lstadd_front(t_stack *list, int nbr)
-{
-	t_stack	*new;
-
-	new = malloc(sizeof(t_stack));
-	if (!new || !list)
-		exit(EXIT_FAILURE);
-	new->nbr = nbr;
-	new->next = list;
-	list = new;
 }
 
 void	ft_lstfree(t_stack *list)
@@ -63,5 +50,4 @@ void	ft_lstfree(t_stack *list)
 		free(current);
 		current = tmp;
 	}
-	free(list);
 }

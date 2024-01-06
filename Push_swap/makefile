@@ -6,7 +6,7 @@
 #    By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/31 10:39:42 by bgoron            #+#    #+#              #
-#    Updated: 2023/12/19 14:57:48 by bgoron           ###   ########.fr        #
+#    Updated: 2024/01/06 19:04:49 by bgoron           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,12 @@ SRCS = pushswap.c \
 	   ft_reverse.c \
 	   ft_sort.c \
 	   ft_utils.c \
+	   ft_utils1.c \
+	   ft_utils2.c \
+	   ft_utils3.c \
+	   ft_utils4.c \
+	   ft_utils5.c \
+	   ft_print.c \
 
 OBJS = $(SRCS:.c=.o)
 
