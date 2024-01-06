@@ -6,25 +6,25 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 20:35:46 by bgoron            #+#    #+#             */
-/*   Updated: 2024/01/06 18:48:55 by bgoron           ###   ########.fr       */
+/*   Updated: 2024/01/06 21:22:27 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSHSWAP_H
 # define PUSHSWAP_H
 
-#include <stdio.h>
-#include <unistd.h>
-#include <stdlib.h>
+# include <stdio.h>
+# include <unistd.h>
+# include <stdlib.h>
 
-typedef struct	s_stack
+typedef struct s_stack
 {
 	int				nbr;
 	int				nbr_init;
 	struct s_stack	*next;
 }				t_stack;
 
-typedef struct	s_move
+typedef struct s_move
 {
 	int	dira;
 	int	dirb;
@@ -61,9 +61,12 @@ void	ft_rrr(t_stack **a, t_stack **b);
 
 void	ft_a_to_b(t_stack **a, t_stack **b);
 void	ft_b_to_a(t_stack **a, t_stack **b);
+void	ft_sort(t_stack **a, t_stack **b);
+void	ft_sort_three(t_stack **a);
 
 void	ft_set_space(char *str);
 void	ft_set_nbr_to_index(t_stack *a);
+void	ft_init_tab(int argc, char **argv, int *tab);
 
 size_t	ft_strlen(char *s);
 size_t	ft_strlcpy(char *dst, char *src, size_t size);

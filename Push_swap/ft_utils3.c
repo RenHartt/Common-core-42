@@ -6,7 +6,7 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 14:29:00 by bgoron            #+#    #+#             */
-/*   Updated: 2024/01/06 17:05:13 by bgoron           ###   ########.fr       */
+/*   Updated: 2024/01/06 21:36:45 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	ft_atoi(char *str)
 
 double	ft_atol(char *str)
 {
-	int	i;
+	int		i;
 	double	nb;
 	double	neg;
 
@@ -90,12 +90,13 @@ int	*ft_one_arg(char **argv)
 	}
 	while (str[i])
 		i++;
-	tab = ft_calloc(sizeof(int), i);
+	tab = ft_calloc(sizeof(int), i + 1);
 	if (!tab)
 		return (NULL);
 	while (++j < i)
 		tab[j] = ft_atoi(str[j]);
 	ft_free_tab(str);
+	tab[j] = 0;
 	return (tab);
 }
 
@@ -107,14 +108,15 @@ int	*ft_many_arg(int argc, char **argv)
 	i = 1;
 	while (argv[i])
 	{
-		if (!ft_is_number(argv[i]) || !ft_is_int(&argv[i]) || !ft_is_double(&argv[i]))
+		if (!ft_is_number(argv[i]) || !ft_is_int(&argv[i]) \
+		|| !ft_is_double(&argv[i]))
 		{
 			ft_putstr("Error\n");
 			return (NULL);
 		}
 		i++;
 	}
-	tab = ft_calloc(sizeof(int), (argc - 1));
+	tab = ft_calloc(sizeof(int), (argc));
 	if (!tab)
 		return (NULL);
 	i = 0;
@@ -123,5 +125,6 @@ int	*ft_many_arg(int argc, char **argv)
 		tab[i] = ft_atoi(argv[i + 1]);
 		i++;
 	}
+	tab[i] = 0;
 	return (tab);
 }

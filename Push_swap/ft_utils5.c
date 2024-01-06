@@ -6,7 +6,7 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 19:04:03 by bgoron            #+#    #+#             */
-/*   Updated: 2024/01/06 19:04:10 by bgoron           ###   ########.fr       */
+/*   Updated: 2024/01/06 20:34:47 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_find_index(t_stack *a, int nbr)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (a)
@@ -29,7 +29,7 @@ int	ft_find_index(t_stack *a, int nbr)
 
 int	ft_find_final_index(t_stack *a, int nbr)
 {
-	int i;
+	int	i;
 
 	i = 1;
 	while (a)

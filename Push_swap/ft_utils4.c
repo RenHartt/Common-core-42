@@ -6,7 +6,7 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 14:33:32 by bgoron            #+#    #+#             */
-/*   Updated: 2024/01/06 15:14:46 by bgoron           ###   ########.fr       */
+/*   Updated: 2024/01/06 20:33:58 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ int	ft_is_number(char *str)
 	{
 		if (str[i] == '-')
 		{
-			if (!((str[i - 1] >= 9 && str[i - 1] <= 13) || (str[i - 1] == ' ')) && i != 0)
+			if (!((str[i - 1] >= 9 && str[i - 1] <= 13) || (str[i - 1] == ' ')) \
+			&& i != 0)
 				return (0);
 			else if (!ft_is_digit(str[i + 1]))
 				return (0);

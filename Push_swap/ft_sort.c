@@ -6,11 +6,40 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 19:45:30 by bgoron            #+#    #+#             */
-/*   Updated: 2024/01/06 16:45:46 by bgoron           ###   ########.fr       */
+/*   Updated: 2024/01/06 21:53:19 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pushswap.h"
+
+void	ft_sort_three(t_stack **a)
+{
+	int	i;
+	int	j;
+	int	k;
+
+	i = (*a)->nbr;
+	j = (*a)->next->nbr;
+	k = (*a)->next->next->nbr;
+	if (i == 1 && j == 3 && k == 2)
+	{
+		ft_rra(a);
+		ft_sa(a);
+	}
+	else if (i == 3 && j == 2 && k == 1)
+	{
+		ft_sa(a);
+		ft_rra(a);
+	}
+	else if (i == 2 && j == 1 && k == 3)
+		ft_sa(a);
+	else if (i == 2 && j == 3 && k == 1)
+		ft_rra(a);
+	else if (i == 3 && j == 1 && k == 2)
+		ft_ra(a);
+	else
+		return ;
+}
 
 void	ft_a_to_b(t_stack **a, t_stack **b)
 {
@@ -56,3 +85,8 @@ void	ft_b_to_a(t_stack **a, t_stack **b)
 	}
 }
 
+void	ft_sort(t_stack **a, t_stack **b)
+{
+	ft_a_to_b(a, b);
+	ft_b_to_a(a, b);
+}
