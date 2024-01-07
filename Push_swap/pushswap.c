@@ -6,17 +6,11 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 20:33:34 by bgoron            #+#    #+#             */
-/*   Updated: 2024/01/06 22:04:49 by bgoron           ###   ########.fr       */
+/*   Updated: 2024/01/07 18:36:43 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pushswap.h"
-
-void	ft_sort_two(t_stack **a)
-{
-	if ((*a)->nbr > (*a)->next->nbr)
-		ft_sa(a);
-}
 
 void	ft_sort_choice(t_stack **a, t_stack **b)
 {
@@ -30,28 +24,34 @@ void	ft_sort_choice(t_stack **a, t_stack **b)
 		ft_sort(a, b);
 }
 
+t_stack	*ft_init_stack(int argc, char **argv)
+{
+	t_stack	*a;
+
+	a = NULL;
+	if (argc == 2)
+		a = ft_one_arg(argv);
+	else if (argc > 2)
+		a = ft_many_arg(argv);
+	return (a);
+}
+
 int	main(int argc, char **argv)
 {
 	t_stack	*a;
 	t_stack	*b;
-	int		*tab;
 	int		i;
-
+	
 	i = 1;
 	b = NULL;
-	tab = NULL;
-	if (argc == 2)
-		tab = ft_one_arg(argv);
-	else if (argc > 2)
-		tab = ft_many_arg(argc, argv);
-	else
+	a = ft_init_stack(argc, argv);
+	if (!a)
 		return (0);
-	a = ft_lstnew(tab[0]);
-	while (tab[i])
-		ft_lstadd_back(a, tab[i++]);
+	ft_print_list(a);
 	ft_set_nbr_to_index(a);
+	ft_print_list(a);
 	ft_sort_choice(&a, &b);
+	ft_print_list(a);
 	ft_lstfree(a);
-	free(tab);
 	return (0);
 }

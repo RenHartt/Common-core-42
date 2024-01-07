@@ -6,7 +6,7 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 14:29:00 by bgoron            #+#    #+#             */
-/*   Updated: 2024/01/06 21:36:45 by bgoron           ###   ########.fr       */
+/*   Updated: 2024/01/07 18:27:25 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,15 +71,25 @@ void	ft_set_space(char *str)
 	}
 }
 
-int	*ft_one_arg(char **argv)
+int ft_strlentab(char **str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
+}
+
+t_stack	*ft_one_arg(char **argv)
 {
 	int		i;
 	int		j;
-	int		*tab;
 	char	**str;
+	t_stack	*tab;
 
-	i = 0;
-	j = -1;
+	j = 0;
+	tab = NULL;
 	ft_set_space(argv[1]);
 	str = ft_split(argv[1], ' ');
 	if (!str || !ft_is_int(str) || !ft_is_double(str))
@@ -88,24 +98,23 @@ int	*ft_one_arg(char **argv)
 		ft_putstr("Error\n");
 		return (NULL);
 	}
-	while (str[i])
-		i++;
-	tab = ft_calloc(sizeof(int), i + 1);
-	if (!tab)
-		return (NULL);
+	i = ft_strlentab(str);
+	tab = ft_lstnew(ft_atoi(str[0]));
 	while (++j < i)
-		tab[j] = ft_atoi(str[j]);
+		ft_lstadd_back(tab, ft_atoi(str[j]));
 	ft_free_tab(str);
-	tab[j] = 0;
 	return (tab);
 }
 
-int	*ft_many_arg(int argc, char **argv)
+t_stack	*ft_many_arg(char **argv)
 {
-	int	i;
-	int	*tab;
+	int		i;
+	int		j;
+	t_stack	*tab;
 
 	i = 1;
+	j = 0;
+	tab = NULL;
 	while (argv[i])
 	{
 		if (!ft_is_number(argv[i]) || !ft_is_int(&argv[i]) \
@@ -116,15 +125,8 @@ int	*ft_many_arg(int argc, char **argv)
 		}
 		i++;
 	}
-	tab = ft_calloc(sizeof(int), (argc));
-	if (!tab)
-		return (NULL);
-	i = 0;
-	while (i < argc - 1)
-	{
-		tab[i] = ft_atoi(argv[i + 1]);
-		i++;
-	}
-	tab[i] = 0;
+	tab = ft_lstnew(ft_atoi(argv[1]));
+	while (++j < i - 1)
+		ft_lstadd_back(tab, ft_atoi(argv[j + 1]));
 	return (tab);
 }

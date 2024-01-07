@@ -6,7 +6,7 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 20:35:46 by bgoron            #+#    #+#             */
-/*   Updated: 2024/01/06 21:22:27 by bgoron           ###   ########.fr       */
+/*   Updated: 2024/01/07 18:37:27 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ void	ft_rrr(t_stack **a, t_stack **b);
 void	ft_a_to_b(t_stack **a, t_stack **b);
 void	ft_b_to_a(t_stack **a, t_stack **b);
 void	ft_sort(t_stack **a, t_stack **b);
+void	ft_sort_two(t_stack **a);
 void	ft_sort_three(t_stack **a);
 
 void	ft_set_space(char *str);
@@ -69,6 +70,7 @@ void	ft_set_nbr_to_index(t_stack *a);
 void	ft_init_tab(int argc, char **argv, int *tab);
 
 size_t	ft_strlen(char *s);
+int		strlentab(char **str);
 size_t	ft_strlcpy(char *dst, char *src, size_t size);
 void	ft_putstr(char *str);
 void	ft_putnbr(int nb);
@@ -83,8 +85,8 @@ char	**ft_split(char *s, char c);
 int		ft_atoi(char *str);
 double	ft_atol(char *str);
 
-int		*ft_one_arg(char **argv);
-int		*ft_many_arg(int argc, char **argv);
+t_stack	*ft_one_arg(char **argv);
+t_stack	*ft_many_arg(char **argv);
 
 int		ft_is_digit(char c);
 int		ft_is_double(char **str);

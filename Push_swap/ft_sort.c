@@ -6,11 +6,17 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 19:45:30 by bgoron            #+#    #+#             */
-/*   Updated: 2024/01/06 21:53:19 by bgoron           ###   ########.fr       */
+/*   Updated: 2024/01/07 18:29:25 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pushswap.h"
+
+void	ft_sort_two(t_stack **a)
+{
+	if ((*a)->nbr > (*a)->next->nbr)
+		ft_sa(a);
+}
 
 void	ft_sort_three(t_stack **a)
 {
