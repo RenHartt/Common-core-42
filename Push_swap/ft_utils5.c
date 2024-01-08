@@ -6,7 +6,7 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 19:04:03 by bgoron            #+#    #+#             */
-/*   Updated: 2024/01/06 20:34:47 by bgoron           ###   ########.fr       */
+/*   Updated: 2024/01/08 15:38:39 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,28 @@ int	ft_find_final_index(t_stack *a, int nbr)
 	return (i);
 }
 
+t_stack	*ft_lst_cpy(t_stack *a)
+{
+	t_stack	*cpy;
+
+	cpy = NULL;
+	while (a)
+	{
+		ft_lstadd_back(&cpy, a->nbr);
+		a = a->next;
+	}
+	return (cpy);
+}
+
 void	ft_set_nbr_to_index(t_stack *a)
 {
 	t_stack	*tmp;
 
-	tmp = a;
+	tmp = ft_lst_cpy(a);
 	while (a)
 	{
 		a->nbr = ft_find_final_index(tmp, a->nbr);
 		a = a->next;
 	}
+	ft_lstfree(tmp);
 }

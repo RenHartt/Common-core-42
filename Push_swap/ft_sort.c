@@ -6,7 +6,7 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 19:45:30 by bgoron            #+#    #+#             */
-/*   Updated: 2024/01/07 18:29:25 by bgoron           ###   ########.fr       */
+/*   Updated: 2024/01/08 19:26:30 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,29 @@ void	ft_sort_three(t_stack **a)
 		return ;
 }
 
-void	ft_a_to_b(t_stack **a, t_stack **b)
+void	ft_sort(t_stack **a, t_stack **b)
+{
+	int	lst_size;
+	int	byte;
+
+	lst_size = 0;
+	byte = 0;
+	while (byte++ < 8)
+	{
+		lst_size = ft_lstsize(*a);
+		while (lst_size--)
+		{
+			if (((*a)->nbr >> byte) & 1)
+				ft_ra(a);
+			else
+				ft_pb(a, b);
+		}
+		while (*b)
+			ft_pa(a, b);
+	}
+}
+
+/*void	ft_a_to_b(t_stack **a, t_stack **b)
 {
 	int	min;
 	int	max;
@@ -95,4 +117,4 @@ void	ft_sort(t_stack **a, t_stack **b)
 {
 	ft_a_to_b(a, b);
 	ft_b_to_a(a, b);
-}
+}*/

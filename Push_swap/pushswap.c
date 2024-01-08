@@ -6,7 +6,7 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 20:33:34 by bgoron            #+#    #+#             */
-/*   Updated: 2024/01/07 18:36:43 by bgoron           ###   ########.fr       */
+/*   Updated: 2024/01/08 18:58:27 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,8 @@ int	main(int argc, char **argv)
 	a = ft_init_stack(argc, argv);
 	if (!a)
 		return (0);
-	ft_print_list(a);
 	ft_set_nbr_to_index(a);
-	ft_print_list(a);
 	ft_sort_choice(&a, &b);
-	ft_print_list(a);
 	ft_lstfree(a);
 	return (0);
 }

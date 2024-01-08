@@ -6,7 +6,7 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 14:29:00 by bgoron            #+#    #+#             */
-/*   Updated: 2024/01/07 18:27:25 by bgoron           ###   ########.fr       */
+/*   Updated: 2024/01/08 15:37:33 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,9 +99,8 @@ t_stack	*ft_one_arg(char **argv)
 		return (NULL);
 	}
 	i = ft_strlentab(str);
-	tab = ft_lstnew(ft_atoi(str[0]));
-	while (++j < i)
-		ft_lstadd_back(tab, ft_atoi(str[j]));
+	while (j < i)
+		ft_lstadd_back(&tab, ft_atoi(str[j++]));
 	ft_free_tab(str);
 	return (tab);
 }
@@ -125,8 +124,7 @@ t_stack	*ft_many_arg(char **argv)
 		}
 		i++;
 	}
-	tab = ft_lstnew(ft_atoi(argv[1]));
-	while (++j < i - 1)
-		ft_lstadd_back(tab, ft_atoi(argv[j + 1]));
+	while (argv[j + 1])
+		ft_lstadd_back(&tab, ft_atoi(argv[++j]));
 	return (tab);
 }

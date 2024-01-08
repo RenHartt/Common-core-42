@@ -6,7 +6,7 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 20:35:46 by bgoron            #+#    #+#             */
-/*   Updated: 2024/01/07 18:37:27 by bgoron           ###   ########.fr       */
+/*   Updated: 2024/01/08 17:56:26 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,21 +20,13 @@
 typedef struct s_stack
 {
 	int				nbr;
-	int				nbr_init;
+	int				cost_a;
+	int				cost_b;
 	struct s_stack	*next;
 }				t_stack;
 
-typedef struct s_move
-{
-	int	dira;
-	int	dirb;
-	int	cost;
-	int	costa;
-	int	costb;
-}				t_move;
-
 t_stack	*ft_lstnew(int nbr);
-void	ft_lstadd_back(t_stack *list, int nbr);
+void	ft_lstadd_back(t_stack **list, int nbr);
 void	ft_lstfree(t_stack *list);
 int		ft_lstsize(t_stack *list);
 int		ft_lstlast(t_stack *a);
