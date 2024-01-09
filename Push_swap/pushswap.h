@@ -6,7 +6,7 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 20:35:46 by bgoron            #+#    #+#             */
-/*   Updated: 2024/01/08 17:56:26 by bgoron           ###   ########.fr       */
+/*   Updated: 2024/01/09 14:51:54 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct s_stack
 }				t_stack;
 
 t_stack	*ft_lstnew(int nbr);
+t_stack	*ft_lst_cpy(t_stack *a);
 void	ft_lstadd_back(t_stack **list, int nbr);
 void	ft_lstfree(t_stack *list);
 int		ft_lstsize(t_stack *list);
@@ -38,22 +39,18 @@ int		ft_find_final_index(t_stack *a, int nbr);
 
 void	ft_sa(t_stack **a);
 void	ft_sb(t_stack **b);
-void	ft_ss(t_stack **a, t_stack **b);
-
 void	ft_pa(t_stack **a, t_stack **b);
 void	ft_pb(t_stack **a, t_stack **b);
 
 void	ft_ra(t_stack **a);
 void	ft_rb(t_stack **b);
-void	ft_rr(t_stack **a, t_stack **b);
-
 void	ft_rra(t_stack **a);
 void	ft_rrb(t_stack **b);
-void	ft_rrr(t_stack **a, t_stack **b);
 
 void	ft_a_to_b(t_stack **a, t_stack **b);
 void	ft_b_to_a(t_stack **a, t_stack **b);
-void	ft_sort(t_stack **a, t_stack **b);
+void	ft_sort_small(t_stack **a, t_stack **b);
+void	ft_sort_big(t_stack **a, t_stack **b);
 void	ft_sort_two(t_stack **a);
 void	ft_sort_three(t_stack **a);
 
@@ -62,8 +59,8 @@ void	ft_set_nbr_to_index(t_stack *a);
 void	ft_init_tab(int argc, char **argv, int *tab);
 
 size_t	ft_strlen(char *s);
-int		strlentab(char **str);
 size_t	ft_strlcpy(char *dst, char *src, size_t size);
+int		ft_strlentab(char **str);
 void	ft_putstr(char *str);
 void	ft_putnbr(int nb);
 
@@ -84,6 +81,6 @@ int		ft_is_digit(char c);
 int		ft_is_double(char **str);
 int		ft_is_number(char *str);
 int		ft_is_int(char **str);
-void	ft_print_list(t_stack *a);
+int		ft_is_sorted(t_stack *a);
 
 #endif
