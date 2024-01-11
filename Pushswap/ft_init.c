@@ -6,23 +6,11 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 16:11:23 by bgoron            #+#    #+#             */
-/*   Updated: 2024/01/09 18:44:16 by bgoron           ###   ########.fr       */
+/*   Updated: 2024/01/11 18:12:24 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pushswap.h"
-
-t_stack	*ft_lstnew(int nbr)
-{
-	t_stack	*new;
-
-	new = ft_calloc(sizeof(t_stack), 1);
-	if (!new)
-		return (NULL);
-	new->nbr = nbr;
-	new->next = NULL;
-	return (new);
-}
 
 void	ft_lstadd_back(t_stack **list, int nbr)
 {

@@ -6,13 +6,13 @@
 #    By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/31 10:39:42 by bgoron            #+#    #+#              #
-#    Updated: 2024/01/09 14:57:47 by bgoron           ###   ########.fr        #
+#    Updated: 2024/01/11 16:44:00 by bgoron           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = push_swap
 CC = clang
-CFLAGS = -Wall -Werror -Wextra -g
+CFLAGS = -Wall -Werror -Wextra
 
 SRCS = pushswap.c \
 	   ft_check_utils.c \
