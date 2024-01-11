@@ -6,7 +6,7 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 20:35:46 by bgoron            #+#    #+#             */
-/*   Updated: 2024/01/11 15:05:22 by bgoron           ###   ########.fr       */
+/*   Updated: 2024/01/11 18:15:49 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ typedef struct s_stack
 }				t_stack;
 
 t_stack	*ft_args(char **argv);
-t_stack	*ft_lstnew(int nbr);
 t_stack	*ft_lst_cpy(t_stack *a);
 void	ft_lstadd_back(t_stack **list, int nbr);
 void	ft_lstfree(t_stack *list);
