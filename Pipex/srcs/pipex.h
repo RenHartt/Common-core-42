@@ -6,7 +6,7 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 13:38:54 by bgoron            #+#    #+#             */
-/*   Updated: 2024/01/21 17:20:22 by bgoron           ###   ########.fr       */
+/*   Updated: 2024/01/21 17:29:03 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,6 @@ void	ft_parent(t_pipex *pipex, t_cmd *cmd);
 void	ft_free_cmd(t_cmd *cmd);
 void	ft_close_fd(t_pipex *pipex);
 void	ft_close_std(void);
+void	ft_error(void);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 17:51:48 by bgoron            #+#    #+#             */
-/*   Updated: 2024/01/21 17:18:36 by bgoron           ###   ########.fr       */
+/*   Updated: 2024/01/21 17:41:20 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,11 @@ t_pipex	*ft_init_pipex(t_pipex	*pipex, int argc, char **argv)
 {
 	pipex->tmpfile = dup(STDIN_FILENO);
 	pipex->infile = open(argv[1], O_RDONLY);
+	if (pipex->infile == -1)
+	{
+		free(pipex);
+		ft_error();
+	}
 	pipex->outfile = open(argv[argc - 1], O_WRONLY | O_CREAT | O_TRUNC, 0777);
 	return (pipex);
 }
@@ -46,7 +51,7 @@ void	ft_pipex(t_pipex *pipex, t_cmd *cmd)
 		if (!i % 2)
 			pipe(pipex->fd);
 		pipex->pid[i] = fork();
-		if (pipex->pid[i++] == 0)
+		if (!pipex->pid[i++])
 		{
 			if (!i)
 				ft_child(pipex, cmd);
@@ -71,6 +76,8 @@ int	main(int argc, char **argv, char **envp)
 	t_cmd	*cmd;
 	int		i;
 
+	if (argc < 5)
+		ft_error();
 	pipex = (t_pipex *)malloc(sizeof(t_pipex));
 	if (!pipex)
 		return (0);
