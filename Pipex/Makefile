@@ -6,7 +6,7 @@
 #    By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/12 13:38:45 by bgoron            #+#    #+#              #
-#    Updated: 2024/01/17 16:51:34 by bgoron           ###   ########.fr        #
+#    Updated: 2024/01/21 17:12:22 by bgoron           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,8 @@ CFLAGS = -Wall -Wextra -Werror -g
 IFLAGS = -I Libft
 
 SRCS = srcs/pipex.c \
+	srcs/parsing.c \
+	srcs/close.c \
 
 OBJS = $(SRCS:.c=.o)
 $(NAME) : $(OBJS)

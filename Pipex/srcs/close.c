@@ -1,40 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   close.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/01 20:41:52 by bgoron            #+#    #+#             */
-/*   Updated: 2024/01/21 16:40:54 by bgoron           ###   ########.fr       */
+/*   Created: 2024/01/21 17:12:34 by bgoron            #+#    #+#             */
+/*   Updated: 2024/01/21 17:15:32 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "pipex.h"
 
-char	*ft_strjoin(char *s1, char *s2)
+void	ft_close_fd(t_pipex *pipex)
 {
-	char	*s3;
-	int		i;
-	int		j;
+	close(pipex->fd[0]);
+	close(pipex->fd[1]);
+	close(pipex->infile);
+	close(pipex->outfile);
+	close(pipex->tmpfile);
+}
 
-	i = 0;
-	j = 0;
-	if (!(s1 && s2))
-		return (NULL);
-	s3 = ft_calloc(sizeof(char), (ft_strlen(s1) + ft_strlen(s2) + 1));
-	if (s3 == NULL)
-		return (NULL);
-	while (s1[i] != '\0')
+void	ft_close_std(void)
+{
+	close(STDIN_FILENO);
+	close(STDOUT_FILENO);
+	close(STDERR_FILENO);
+}
+
+void	ft_free_cmd(t_cmd *cmd)
+{
+	t_cmd	*tmp;
+
+	while (cmd)
 	{
-		s3[i] = s1[i];
-		i++;
+		tmp = cmd;
+		cmd = cmd->next;
+		ft_free_char_tab(tmp->cmd);
+		free(tmp->path);
+		free(tmp);
 	}
-	while (s2[j] != '\0')
-	{
-		s3[i + j] = s2[j];
-		j++;
-	}
-	s3[i + j] = '\0';
-	return (s3);
 }
