@@ -6,11 +6,11 @@
 #    By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/12 13:38:45 by bgoron            #+#    #+#              #
-#    Updated: 2024/01/21 17:12:22 by bgoron           ###   ########.fr        #
+#    Updated: 2024/01/23 16:50:13 by bgoron           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = Pipex
+NAME = pipex
 CC = clang
 CFLAGS = -Wall -Wextra -Werror -g
 IFLAGS = -I Libft
@@ -18,6 +18,9 @@ IFLAGS = -I Libft
 SRCS = srcs/pipex.c \
 	srcs/parsing.c \
 	srcs/close.c \
+	srcs/do_pipe.c \
+	srcs/init.c \
+	srcs/GNL.c \
 
 OBJS = $(SRCS:.c=.o)
 $(NAME) : $(OBJS)

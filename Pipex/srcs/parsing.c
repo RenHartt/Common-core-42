@@ -6,7 +6,7 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 17:04:54 by bgoron            #+#    #+#             */
-/*   Updated: 2024/01/21 17:16:03 by bgoron           ###   ########.fr       */
+/*   Updated: 2024/01/23 19:14:04 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,10 @@ t_cmd	*ft_new_cmd(char *cmd, char **envp)
 	if (!new)
 		return (NULL);
 	new->cmd = ft_split(cmd, ' ');
-	new->path = ft_get_path(new->cmd[0], envp);
+	if (!access(new->cmd[0], F_OK))
+		new->path = ft_strdup(new->cmd[0]);
+	else
+		new->path = ft_get_path(new->cmd[0], envp);
 	new->next = NULL;
 	return (new);
 }

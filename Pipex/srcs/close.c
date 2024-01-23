@@ -6,7 +6,7 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 17:12:34 by bgoron            #+#    #+#             */
-/*   Updated: 2024/01/21 17:42:26 by bgoron           ###   ########.fr       */
+/*   Updated: 2024/01/23 18:42:04 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,11 @@ void	ft_free_cmd(t_cmd *cmd)
 void	ft_error(void)
 {
 	ft_putstr_fd("Error\n", 2);
+	exit(EXIT_FAILURE);
+}
+
+void	ft_usage(void)
+{
+	ft_putstr_fd("Usage: ./pipex infile cmd ... cmd outfile\n", 2);
 	exit(EXIT_FAILURE);
 }
