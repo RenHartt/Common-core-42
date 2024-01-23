@@ -6,7 +6,7 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 17:04:54 by bgoron            #+#    #+#             */
-/*   Updated: 2024/01/23 19:14:04 by bgoron           ###   ########.fr       */
+/*   Updated: 2024/01/23 21:09:49 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,29 +69,5 @@ void	ft_add_cmd(t_cmd **list, t_cmd *new)
 		while (tmp->next)
 			tmp = tmp->next;
 		tmp->next = new;
-	}
-}
-
-void	ft_print_cmd(t_cmd *cmd)
-{
-	int	i;
-
-	while (cmd)
-	{
-		ft_putstr_fd("cmd: ", 1);
-		ft_putendl_fd(cmd->cmd[0], 1);
-		ft_putstr_fd("flags: ", 1);
-		i = 1;
-		while (cmd->cmd[i])
-		{
-			ft_putstr_fd(cmd->cmd[i], 1);
-			ft_putchar_fd(' ', 1);
-			i++;
-		}
-		ft_putchar_fd('\n', 1);
-		ft_putstr_fd("path: ", 1);
-		ft_putendl_fd(cmd->path, 1);
-		ft_putchar_fd('\n', 1);
-		cmd = cmd->next;
 	}
 }

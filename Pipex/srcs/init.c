@@ -6,7 +6,7 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 16:30:21 by bgoron            #+#    #+#             */
-/*   Updated: 2024/01/23 19:01:14 by bgoron           ###   ########.fr       */
+/*   Updated: 2024/01/23 23:24:16 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,14 @@ t_pipex	*ft_init_pipex(int argc, char **argv)
 	pipex = (t_pipex *)malloc(sizeof(t_pipex));
 	if (!pipex)
 		return (NULL);
-	pipex->infile = open(argv[1], O_RDONLY);
+	if (!ft_strncmp(argv[1], "here_doc", 9))
+		pipex->infile = open("here_doc", O_RDONLY);
+	else
+		pipex->infile = open(argv[1], O_RDONLY);
 	if (pipex->infile == -1)
 	{
 		free(pipex);
-		ft_error();
+		exit(EXIT_FAILURE);
 	}
 	pipex->tmpfile = dup(STDIN_FILENO);
 	pipex->outfile = open(argv[argc - 1], O_WRONLY | O_CREAT | O_TRUNC, 0777);

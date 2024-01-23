@@ -6,7 +6,7 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 16:48:27 by bgoron            #+#    #+#             */
-/*   Updated: 2024/01/23 18:55:25 by bgoron           ###   ########.fr       */
+/*   Updated: 2024/01/23 23:09:40 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	ft_isendline(char *str, char *buffer)
 		while (str[i])
 			buffer[j++] = str[i++];
 		buffer[j] = '\0';
-		str[i - j] = '\0';
+		str[i - j - 1] = '\0';
 		return (1);
 	}
 	return (0);
@@ -63,20 +63,19 @@ char	*get_next_line(int fd)
 	int			r;
 
 	line = ft_calloc(1, 1);
-	if (!buffer[fd])
-		buffer[fd] = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
+	buffer[fd] = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
 	while (buffer[fd] && line)
 	{
 		line = ft_gnljoin(line, buffer[fd]);
 		if (ft_isendline(line, buffer[fd]))
+		{
+			free(buffer[fd]);
 			return (line);
+		}
 		r = read(fd, buffer[fd], BUFFER_SIZE);
 		if (r < 1)
 		{
 			free(buffer[fd]);
-			buffer[fd] = NULL;
-			if (line[0] != '\0')
-				return (line);
 			free(line);
 			return (NULL);
 		}

@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/30 17:14:05 by bgoron            #+#    #+#             */
-/*   Updated: 2024/01/23 21:38:30 by bgoron           ###   ########.fr       */
+/*   Created: 2024/01/23 21:31:04 by bgoron            #+#    #+#             */
+/*   Updated: 2024/01/23 21:34:43 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
+int		ft_strcmp(const char *str1, const char *str2)
 {
-	if (!s1 || !s2 || !n)
+	if (!str1 || !str2)
 		return (-1);
-	while (*s1 && *s2 && *s1 == *s2 && n > 1)
+	while (*str1 && *str2 && *str1 == *str2)
 	{
-		s1++;
-		s2++;
-		n--;
+		str1++;
+		str2++;
 	}
-	return ((int)((unsigned char)*s1 - (unsigned char)*s2));
+	return ((int)((unsigned char)*str1 - (unsigned char)*str2));
 }

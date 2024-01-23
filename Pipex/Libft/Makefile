@@ -6,7 +6,7 @@
 #    By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/31 10:39:42 by bgoron            #+#    #+#              #
-#    Updated: 2024/01/20 16:05:38 by bgoron           ###   ########.fr        #
+#    Updated: 2024/01/23 21:33:37 by bgoron           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ ft_tolower.c \
 ft_strchr.c \
 ft_strrchr.c \
 ft_strncmp.c \
+ft_strcmp.c \
 ft_strnstr.c \
 ft_atoi.c \
 ft_memset.c \
