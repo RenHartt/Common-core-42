@@ -6,7 +6,7 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 13:38:54 by bgoron            #+#    #+#             */
-/*   Updated: 2024/01/24 17:27:22 by bgoron           ###   ########.fr       */
+/*   Updated: 2024/01/24 23:51:21 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,6 @@ void	ft_close_std(void);
 void	ft_usage(void);
 void	ft_error(void);
 
-int		get_next_line(char **line);
+char	*get_next_line(int fd);
 
 #endif

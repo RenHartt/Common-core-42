@@ -6,13 +6,13 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 21:31:04 by bgoron            #+#    #+#             */
-/*   Updated: 2024/01/23 21:34:43 by bgoron           ###   ########.fr       */
+/*   Updated: 2024/01/25 00:29:02 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_strcmp(const char *str1, const char *str2)
+int	ft_strcmp(const char *str1, const char *str2)
 {
 	if (!str1 || !str2)
 		return (-1);

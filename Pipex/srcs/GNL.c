@@ -6,35 +6,89 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 17:25:40 by bgoron            #+#    #+#             */
-/*   Updated: 2024/01/24 17:51:04 by bgoron           ###   ########.fr       */
+/*   Updated: 2024/01/25 00:12:32 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-int	get_next_line(char **line)
+char	*ft_gnljoin(char *s1, char *s2)
 {
-	char	*buffer;
+	char	*s3;
 	int		i;
-	int		r;
-	char	c;
+	int		j;
 
 	i = 0;
-	r = 0;
-	buffer = (char *)malloc(10000);
-	if (!buffer)
-		return (-1);
-	r = read(0, &c, 1);
-	while (r && c != '\n' && c != '\0')
+	j = 0;
+	if (!s1 || !s2)
+		return (NULL);
+	s3 = ft_calloc((ft_strlen(s1) + ft_strlen(s2) + 1), sizeof(char));
+	if (s3 == NULL)
+		return (NULL);
+	while (s1[i])
 	{
-		if (c != '\n' && c != '\0')
-			buffer[i] = c;
+		s3[i] = s1[i];
 		i++;
-		r = read(0, &c, 1);
 	}
-	buffer[i] = '\n';
-	buffer[++i] = '\0';
-	*line = buffer;
-	free(buffer);
-	return (r);
+	while (s2[j])
+	{
+		s3[i + j] = s2[j];
+		j++;
+	}
+	free(s1);
+	return (s3);
+}
+
+int	ft_isendline(char *str, char *buffer)
+{
+	size_t	i;
+	size_t	j;
+
+	i = 0;
+	j = 0;
+	while (str[i] != '\n' && str[i])
+		i++;
+	if (str[i] == '\n')
+	{
+		i++;
+		while (str[i])
+		{
+			buffer[j] = str[i];
+			i++;
+			j++;
+		}
+		buffer[j] = '\0';
+		str[i - j] = '\0';
+		return (1);
+	}
+	return (0);
+}
+
+char	*get_next_line(int fd)
+{
+	static char	*buffer;
+	char		*line;
+	int			r;
+
+	line = ft_calloc(1, 1);
+	if (!buffer)
+		buffer = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
+	while (buffer && line)
+	{
+		line = ft_gnljoin(line, buffer);
+		if (ft_isendline(line, buffer))
+			return (line);
+		r = read(fd, buffer, BUFFER_SIZE);
+		if (r < 1)
+		{
+			free(buffer);
+			buffer = NULL;
+			if (line[0] != '\0')
+				return (line);
+			free(line);
+			return (NULL);
+		}
+		buffer[r] = '\0';
+	}
+	return (NULL);
 }
