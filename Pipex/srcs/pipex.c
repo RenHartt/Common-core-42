@@ -6,7 +6,7 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 17:51:48 by bgoron            #+#    #+#             */
-/*   Updated: 2024/01/25 00:26:28 by bgoron           ###   ########.fr       */
+/*   Updated: 2024/01/26 21:19:39 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,25 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_pipex	*pipex;
 	t_cmd	*cmd;
-	int		i;
 
-	i = 2;
 	if (argc >= 5)
 	{
-		pipex = ft_init_pipex(argc, argv, i);
-		cmd = ft_init_cmd(argc, argv, envp, i);
+		if (!ft_strcmp(argv[1], "here_doc"))
+		{
+			if (argc < 6)
+				ft_usage_here_doc();
+			pipex = ft_init_pipex(argc, argv, 3);
+			cmd = ft_init_cmd(argc, argv, envp, 3);
+			here_doc(argv[2], pipex);
+		}
+		else
+		{
+			pipex = ft_init_pipex(argc, argv, 2);
+			cmd = ft_init_cmd(argc, argv, envp, 2);
+		}
 		ft_pipex(pipex, cmd);
-		ft_close_fd(pipex);
-		ft_free_cmd(cmd);
-		free(pipex);
-		return (0);
+		ft_exit(pipex, cmd);
 	}
 	ft_usage();
+	return (0);
 }

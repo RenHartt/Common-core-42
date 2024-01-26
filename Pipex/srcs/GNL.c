@@ -6,7 +6,7 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 17:25:40 by bgoron            #+#    #+#             */
-/*   Updated: 2024/01/25 00:12:32 by bgoron           ###   ########.fr       */
+/*   Updated: 2024/01/26 21:02:48 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,6 @@ char	*get_next_line(int fd)
 		if (r < 1)
 		{
 			free(buffer);
-			buffer = NULL;
 			if (line[0] != '\0')
 				return (line);
 			free(line);

@@ -1,29 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   ft_usage.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/30 17:14:05 by bgoron            #+#    #+#             */
-/*   Updated: 2024/01/26 19:47:05 by bgoron           ###   ########.fr       */
+/*   Created: 2024/01/26 21:13:29 by bgoron            #+#    #+#             */
+/*   Updated: 2024/01/26 21:27:34 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "pipex.h"
 
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
+void	ft_usage(void)
 {
-	size_t	i;
+	ft_putstr_fd("Usage: ./pipex infile cmd ... cmd outfile\n", 2);
+	ft_putstr_fd("or\n", 2);
+	ft_putstr_fd("Usage: ./pipex here_doc LIMITER cmd ... cmd outfile\n", 2);
+	exit(EXIT_FAILURE);
+}
 
-	i = 0;
-	if (!s1)
-		return (*s2);
-	if (!s2)
-		return (*s1);
-	while (s1[i] && s1[i] == s2[i] && i < n)
-		i++;
-	if (i == n)
-		return (0);
-	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+void	ft_usage_here_doc(void)
+{
+	ft_putstr_fd("Usage: ./pipex here_doc LIMITER cmd ... cmd outfile\n", 2);
+	exit(EXIT_FAILURE);
 }

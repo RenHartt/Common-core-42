@@ -6,7 +6,7 @@
 #    By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/12 13:38:45 by bgoron            #+#    #+#              #
-#    Updated: 2024/01/23 16:50:13 by bgoron           ###   ########.fr        #
+#    Updated: 2024/01/26 21:23:57 by bgoron           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,11 +16,11 @@ CFLAGS = -Wall -Wextra -Werror -g
 IFLAGS = -I Libft
 
 SRCS = srcs/pipex.c \
-	srcs/parsing.c \
 	srcs/close.c \
 	srcs/do_pipe.c \
 	srcs/init.c \
 	srcs/GNL.c \
+	srcs/ft_usage.c \
 
 OBJS = $(SRCS:.c=.o)
 $(NAME) : $(OBJS)

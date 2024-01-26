@@ -6,7 +6,7 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 00:04:46 by bgoron            #+#    #+#             */
-/*   Updated: 2024/01/24 16:23:19 by bgoron           ###   ########.fr       */
+/*   Updated: 2024/01/26 21:25:52 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,23 @@ void	ft_pipex(t_pipex *pipex, t_cmd *cmd)
 	}
 	while (i > 0)
 		waitpid(pipex->pid[--i], NULL, 0);
+}
+
+void	here_doc(char *limiter, t_pipex *pipex)
+{
+	char	*line;
+
+	while (1)
+	{
+		ft_putstr_fd("heredoc> ", 1);
+		line = get_next_line(STDIN_FILENO);
+		if (!ft_strncmp(line, limiter, ft_strlen(limiter)))
+		{
+			free(line);
+			unlink(".tmpfile");
+			break ;
+		}
+		ft_putstr_fd(line, pipex->outfile);
+		free(line);
+	}
 }
