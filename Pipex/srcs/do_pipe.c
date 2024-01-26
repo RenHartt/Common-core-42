@@ -6,7 +6,7 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 00:04:46 by bgoron            #+#    #+#             */
-/*   Updated: 2024/01/26 21:25:52 by bgoron           ###   ########.fr       */
+/*   Updated: 2024/01/27 00:00:04 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,21 +64,26 @@ void	ft_pipex(t_pipex *pipex, t_cmd *cmd)
 		waitpid(pipex->pid[--i], NULL, 0);
 }
 
-void	here_doc(char *limiter, t_pipex *pipex)
+int	here_doc(char *limiter)
 {
 	char	*line;
+	int		fd1;
+	int		fd2;
 
-	while (1)
+	line = NULL;
+	fd1 = open(".tmpfile", O_WRONLY | O_CREAT | O_TRUNC, 0777);
+	fd2 = dup(fd1);
+	while (ft_strncmp(line, limiter, ft_strlen(limiter)))
 	{
+		ft_putstr_fd(line, fd1);
+		free(line);
 		ft_putstr_fd("heredoc> ", 1);
 		line = get_next_line(STDIN_FILENO);
-		if (!ft_strncmp(line, limiter, ft_strlen(limiter)))
-		{
-			free(line);
-			unlink(".tmpfile");
-			break ;
-		}
-		ft_putstr_fd(line, pipex->outfile);
-		free(line);
 	}
+	free(line);
+	close(fd2);
+	fd2 = open(".tmpfile", O_RDONLY);
+	close(fd1);
+	unlink(".tmpfile");
+	return (fd2);
 }

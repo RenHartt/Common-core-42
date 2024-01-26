@@ -6,7 +6,7 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 17:51:48 by bgoron            #+#    #+#             */
-/*   Updated: 2024/01/26 21:19:39 by bgoron           ###   ########.fr       */
+/*   Updated: 2024/01/26 22:55:56 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int	main(int argc, char **argv, char **envp)
 				ft_usage_here_doc();
 			pipex = ft_init_pipex(argc, argv, 3);
 			cmd = ft_init_cmd(argc, argv, envp, 3);
-			here_doc(argv[2], pipex);
 		}
 		else
 		{

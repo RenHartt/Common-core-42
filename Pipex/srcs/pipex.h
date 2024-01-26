@@ -6,7 +6,7 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 13:38:54 by bgoron            #+#    #+#             */
-/*   Updated: 2024/01/26 21:20:10 by bgoron           ###   ########.fr       */
+/*   Updated: 2024/01/26 22:56:06 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	ft_first(t_pipex *pipex, t_cmd *cmd);
 void	ft_middle(t_pipex *pipex, t_cmd *cmd);
 void	ft_last(t_pipex *pipex, t_cmd *cmd);
 void	ft_pipex(t_pipex *pipex, t_cmd *cmd);
-void	here_doc(char *limiter, t_pipex *pipex);
+int		here_doc(char *limiter);
 
 void	ft_exit(t_pipex *pipex, t_cmd *cmd);
 void	ft_close_fd(t_pipex *pipex);
