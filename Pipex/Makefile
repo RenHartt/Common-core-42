@@ -6,7 +6,7 @@
 #    By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/12 13:38:45 by bgoron            #+#    #+#              #
-#    Updated: 2024/01/26 21:23:57 by bgoron           ###   ########.fr        #
+#    Updated: 2024/01/27 01:15:27 by bgoron           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,18 +24,18 @@ SRCS = srcs/pipex.c \
 
 OBJS = $(SRCS:.c=.o)
 $(NAME) : $(OBJS)
-	make -C Libft
-	$(CC) $(CLAGS) $(OBJS) -o $(NAME) Libft/libft.a
+	@make -C Libft
+	@$(CC) $(CLAGS) $(OBJS) -o $(NAME) Libft/libft.a
 
 .c.o :
-	$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean :
-	make clean -C Libft
-	rm -rf $(OBJS)
+	@make clean -C Libft
+	@rm -rf $(OBJS)
 
 fclean : clean
-	rm -rf $(NAME)
+	@rm -rf $(NAME)
 
 re : fclean all
 

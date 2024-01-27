@@ -6,7 +6,7 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 13:38:54 by bgoron            #+#    #+#             */
-/*   Updated: 2024/01/26 22:56:06 by bgoron           ###   ########.fr       */
+/*   Updated: 2024/01/27 01:45:41 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <fcntl.h>
-
-# define BUFFER_SIZE 1
 
 typedef struct s_pipex
 {

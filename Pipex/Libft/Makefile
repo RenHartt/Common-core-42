@@ -6,7 +6,7 @@
 #    By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/31 10:39:42 by bgoron            #+#    #+#              #
-#    Updated: 2024/01/23 21:33:37 by bgoron           ###   ########.fr        #
+#    Updated: 2024/01/27 01:12:49 by bgoron           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,16 +64,16 @@ OBJS = $(SRCS:.c=.o)
 
 
 $(NAME) : $(OBJS)
-	ar rcs $(NAME) $(OBJS)
+	@ar rcs $(NAME) $(OBJS)
 
 .c.o :
-	$(CC) $(CFLAGS) -c $< -o $@ -I.
+	@$(CC) $(CFLAGS) -c $< -o $@ -I.
 
 clean :
-	rm -rf $(OBJS)
+	@rm -rf $(OBJS)
 
 fclean : clean
-	rm -rf $(NAME)
+	@rm -rf $(NAME)
 
 re : fclean all
 

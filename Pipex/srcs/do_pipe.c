@@ -6,7 +6,7 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 00:04:46 by bgoron            #+#    #+#             */
-/*   Updated: 2024/01/27 00:00:04 by bgoron           ###   ########.fr       */
+/*   Updated: 2024/01/27 01:44:23 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ int	here_doc(char *limiter)
 
 	line = NULL;
 	fd1 = open(".tmpfile", O_WRONLY | O_CREAT | O_TRUNC, 0777);
+	if (fd1 == -1)
+		ft_error();
 	fd2 = dup(fd1);
 	while (ft_strncmp(line, limiter, ft_strlen(limiter)))
 	{
@@ -83,6 +85,8 @@ int	here_doc(char *limiter)
 	free(line);
 	close(fd2);
 	fd2 = open(".tmpfile", O_RDONLY);
+	if (fd2 == -1)
+		ft_error();
 	close(fd1);
 	unlink(".tmpfile");
 	return (fd2);
