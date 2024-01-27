@@ -6,32 +6,43 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 00:04:46 by bgoron            #+#    #+#             */
-/*   Updated: 2024/01/27 01:44:23 by bgoron           ###   ########.fr       */
+/*   Updated: 2024/01/27 18:06:42 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	ft_first(t_pipex *pipex, t_cmd *cmd)
+void	ft_usage(void)
 {
-	dup2(pipex->infile, STDIN_FILENO);
-	dup2(pipex->fd[1], STDOUT_FILENO);
-	ft_close_fd(pipex);
-	execve(cmd->path, cmd->cmd, NULL);
+	ft_putstr_fd("Usage: ./pipex infile cmd ... cmd outfile\n", 2);
+	ft_putstr_fd("or\n", 2);
+	ft_putstr_fd("Usage: ./pipex here_doc LIMITER cmd ... cmd outfile\n", 2);
+	exit(EXIT_FAILURE);
 }
 
-void	ft_middle(t_pipex *pipex, t_cmd *cmd)
+void	ft_usage_here_doc(void)
 {
-	dup2(pipex->tmpfile, STDIN_FILENO);
-	dup2(pipex->fd[1], STDOUT_FILENO);
-	ft_close_fd(pipex);
-	execve(cmd->path, cmd->cmd, NULL);
+	ft_putstr_fd("Usage: ./pipex here_doc limiter cmd ... cmd outfile\n", 2);
+	exit(EXIT_FAILURE);
 }
 
-void	ft_last(t_pipex *pipex, t_cmd *cmd)
+void	ft_exec(t_pipex *pipex, t_cmd *cmd, int i)
 {
-	dup2(pipex->tmpfile, STDIN_FILENO);
-	dup2(pipex->outfile, STDOUT_FILENO);
+	if (i == 0)
+	{
+		dup2(pipex->infile, STDIN_FILENO);
+		dup2(pipex->fd[1], STDOUT_FILENO);
+	}
+	else if (cmd->next)
+	{
+		dup2(pipex->tmpfile, STDIN_FILENO);
+		dup2(pipex->fd[1], STDOUT_FILENO);
+	}
+	else
+	{
+		dup2(pipex->tmpfile, STDIN_FILENO);
+		dup2(pipex->outfile, STDOUT_FILENO);
+	}
 	ft_close_fd(pipex);
 	execve(cmd->path, cmd->cmd, NULL);
 }
@@ -46,14 +57,7 @@ void	ft_pipex(t_pipex *pipex, t_cmd *cmd)
 		pipe(pipex->fd);
 		pipex->pid[i] = fork();
 		if (!pipex->pid[i])
-		{
-			if (i == 0)
-				ft_first(pipex, cmd);
-			else if (cmd->next)
-				ft_middle(pipex, cmd);
-			else
-				ft_last(pipex, cmd);
-		}
+			ft_exec(pipex, cmd, i);
 		close(pipex->fd[1]);
 		close(pipex->tmpfile);
 		pipex->tmpfile = pipex->fd[0];
@@ -64,25 +68,26 @@ void	ft_pipex(t_pipex *pipex, t_cmd *cmd)
 		waitpid(pipex->pid[--i], NULL, 0);
 }
 
-int	here_doc(char *limiter)
+int	ft_here_doc(char *d)
 {
-	char	*line;
+	char	*l;
 	int		fd1;
 	int		fd2;
 
-	line = NULL;
+	l = NULL;
 	fd1 = open(".tmpfile", O_WRONLY | O_CREAT | O_TRUNC, 0777);
 	if (fd1 == -1)
 		ft_error();
 	fd2 = dup(fd1);
-	while (ft_strncmp(line, limiter, ft_strlen(limiter)))
+	while (ft_strncmp(l, d, ft_strlen(d)) || ft_strlen(l) != ft_strlen(d) + 1)
 	{
-		ft_putstr_fd(line, fd1);
-		free(line);
+		ft_putstr_fd(l, fd1);
+		free(l);
 		ft_putstr_fd("heredoc> ", 1);
-		line = get_next_line(STDIN_FILENO);
+		l = get_next_line(STDIN_FILENO, 1);
 	}
-	free(line);
+	free(l);
+	get_next_line(0, 0);
 	close(fd2);
 	fd2 = open(".tmpfile", O_RDONLY);
 	if (fd2 == -1)

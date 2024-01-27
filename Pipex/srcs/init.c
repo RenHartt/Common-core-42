@@ -6,7 +6,7 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 16:30:21 by bgoron            #+#    #+#             */
-/*   Updated: 2024/01/27 00:28:05 by bgoron           ###   ########.fr       */
+/*   Updated: 2024/01/27 18:07:18 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ t_pipex	*ft_init_pipex(int argc, char **argv, int i)
 			ft_error();
 	}
 	else
-		pipex->infile = here_doc(argv[2]);
+		pipex->infile = ft_here_doc(argv[2]);
 	pipex->tmpfile = dup(STDIN_FILENO);
 	pipex->outfile = open(argv[argc - 1], O_WRONLY | O_CREAT | O_TRUNC, 0777);
 	if (pipex->outfile == -1)

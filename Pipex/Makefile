@@ -6,7 +6,7 @@
 #    By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/12 13:38:45 by bgoron            #+#    #+#              #
-#    Updated: 2024/01/27 01:15:27 by bgoron           ###   ########.fr        #
+#    Updated: 2024/01/27 17:51:32 by bgoron           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,8 +19,6 @@ SRCS = srcs/pipex.c \
 	srcs/close.c \
 	srcs/do_pipe.c \
 	srcs/init.c \
-	srcs/GNL.c \
-	srcs/ft_usage.c \
 
 OBJS = $(SRCS:.c=.o)
 $(NAME) : $(OBJS)
