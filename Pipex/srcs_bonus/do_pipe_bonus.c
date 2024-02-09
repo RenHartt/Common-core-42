@@ -6,7 +6,7 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 00:04:46 by bgoron            #+#    #+#             */
-/*   Updated: 2024/02/08 20:07:46 by bgoron           ###   ########.fr       */
+/*   Updated: 2024/02/09 15:23:54 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ int	ft_here_doc(char *d)
 
 	l = NULL;
 	tmp = ft_random(10);
-	fd1 = open(tmp, O_WRONLY | O_CREAT | O_TRUNC, 0777);
+	fd1 = open(tmp, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (fd1 == -1)
 		ft_open_failed(NULL);
 	fd2 = dup(fd1);
