@@ -6,7 +6,7 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 13:44:57 by bgoron            #+#    #+#             */
-/*   Updated: 2024/02/14 15:33:34 by bgoron           ###   ########.fr       */
+/*   Updated: 2024/02/14 18:37:13 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	main(void)
 	char	*line;
 	t_token	*token;
 	
-	line = ft_strdup("ls -l | << grep >> srcs | wc-l > test");
+	line = ft_strdup("ls -l | << grep >> srcs | wc -l > test");
 	token = parse_token(line);
 	while (token)
 	{

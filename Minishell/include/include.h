@@ -6,7 +6,7 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 14:27:33 by bgoron            #+#    #+#             */
-/*   Updated: 2024/02/14 02:35:20 by bgoron           ###   ########.fr       */
+/*   Updated: 2024/02/14 16:45:48 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ typedef enum e_type
 	REDIR_IN,
 	REDIR_OUT,
 	HERE_DOC,
-	REDIR_HAPPEND
+	HAPPEND
 }				t_type;
 
 typedef struct s_token
