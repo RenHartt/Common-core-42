@@ -1,30 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strndup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/12 13:44:57 by bgoron            #+#    #+#             */
-/*   Updated: 2024/02/15 12:29:11 by bgoron           ###   ########.fr       */
+/*   Created: 2024/02/14 22:25:22 by bgoron            #+#    #+#             */
+/*   Updated: 2024/02/14 22:25:49 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/include.h"
+#include "libft.h"
 
-int	main(void)
+char	*ft_strndup(const char *s1, size_t n)
 {
-	char	*line;
-	t_token	*token;
-	
-	line = ft_strdup("<<cat>>|gr'ep srcs|wc -l>test");
-	token = parse_token(line);
-	token = token->next;
-	while (token)
+	char	*dup;
+	size_t	i;
+
+	i = 0;
+	dup = (char *)malloc(sizeof(char) * (n + 1));
+	if (!dup)
+		return (NULL);
+	while (s1[i] && i < n)
 	{
-		printf("%s\n", token->content);
-		printf("%d\n", token->type);
-		token = token->next;
+		dup[i] = s1[i];
+		i++;
 	}
-	return (0);
+	dup[i] = '\0';
+	return (dup);
 }
