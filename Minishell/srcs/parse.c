@@ -6,7 +6,7 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 02:14:45 by bgoron            #+#    #+#             */
-/*   Updated: 2024/02/15 12:27:32 by bgoron           ###   ########.fr       */
+/*   Updated: 2024/02/15 17:52:31 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,89 +26,95 @@ t_token	*new_token(char *content, t_type type)
 	return (new);
 }
 
-t_token	*add_token(t_token *token, char *content, t_type type)
+void	add_token(t_token **token, t_token *next)
 {
-	t_token	*new;
 	t_token	*tmp;
-
-	new = new_token(content, type);
-	if (!new)
-		return (NULL);
-	tmp = token;
+	
+	if (!token || !next)
+		return ;
+	if (!*token)
+	{
+		*token = next;
+		return ; 
+	}
+	tmp = *token;
 	while (tmp->next)
 		tmp = tmp->next;
-	tmp->next = new;
-	new->prev = tmp;
-	return (token);
+	tmp->next = next;
+	next->prev = tmp;
 }
 
-int	is_white_space(char c)
+void	free_token(t_token *token)
 {
-	return ((c == ' ') || ((c >= 9) && (c <= 13)));
+	t_token	*next;
+
+	next = NULL;
+	if (!token)
+		return ;
+	while (token)
+	{
+		next = token->next;
+		free(token->content);
+		free(token);
+		token = next;
+	}
 }
 
-size_t	ft_strcsnp(char *s, char *reject)
+void	heredoc_token(t_token **token, char **line)
 {
-	size_t	i;
-
-	i = 0;
-	while (s[i] && !ft_strchr(reject, s[i]))
-		i++;
-	return (i);
-}
-
-void	heredoc_token(t_token *token, char **line)
-{
-	token = add_token(token, "<<", HERE_DOC);
+	add_token(token, new_token(ft_strdup("<<"), HERE_DOC));
 	(*line)++;
 }
 
-void	append_token(t_token *token, char **line)
+void	append_token(t_token **token, char **line)
 {
-	token = add_token(token, ">>", HAPPEND);
+	add_token(token, new_token(ft_strdup(">>"), HAPPEND));
 	(*line)++;
 }
 
-void	word_token(t_token *token, char **line, char *word)
+void	word_token(t_token **token, char **line, char *word)
 {
 	word = ft_strndup(*line, ft_strcsnp(*line, "\t\n\v\f\r'\" <>|"));
-	token = add_token(token, word, WORD);
+	add_token(token, new_token(word, WORD));
 	*line += ft_strlen(word);
 	(*line)--;
 }
 
-void	simple_quote_token(t_token *token, char **line, char *word)
+void	simple_quote_token(t_token **token, char **line, char *word)
 {
 	(*line)++;
-	word = ft_strndup(*line, ft_strcsnp(*line, "\'"));
-	token = add_token(token, word, WORD);
+	word = ft_strndup(*line, ft_strcsnp(*line, "'"));
+	add_token(token, new_token(word, WORD));
 	*line += ft_strlen(word);
-	(*line)++;
 }
 
-void	double_quote_token(t_token *token, char **line, char *word)
+char	*del_empty_quote(char *str)
+{
+	
+}
+
+void	double_quote_token(t_token **token, char **line, char *word)
 {
 	(*line)++;
 	word = ft_strndup(*line, ft_strcsnp(*line, "\""));
-	token = add_token(token, word, WORD);
+	add_token(token, new_token(word, WORD));
 	*line += ft_strlen(word);
-	(*line)++;
 }
 
-void	init_token(t_token *token, char **line, char *word)
+void	init_token(t_token **token, char **line, char *word)
 {
-	while (is_white_space(**line))
+	while (ft_is_white_space(**line))
 		(*line)++;
 	if (!ft_strncmp(*line, "<<", 2))
 		heredoc_token(token, line);
 	else if (!ft_strncmp(*line, ">>", 2))
 		append_token(token, line);
 	else if (**line == '|')
-		token = add_token(token, "|", PIPE);
+		add_token(token, new_token(ft_strdup("|"), PIPE));
 	else if (**line == '<')
-		token = add_token(token, "<", REDIR_OUT);
+		add_token(token, new_token(ft_strdup("<"), REDIR_OUT));
 	else if (**line == '>')
-		token = add_token(token, ">", REDIR_IN);
+		add_token(token, new_token(ft_strdup(">"), REDIR_IN));
 	else if (**line == '\'')
 		simple_quote_token(token, line, word);
 	else if (**line == '\"')
@@ -123,12 +129,10 @@ t_token	*parse_token(char *line)
 	t_token	*token;
 	char	*word;
 
-	token = (t_token *)malloc(sizeof(t_token));
-	if (!token)
-		return (NULL);
+	token = NULL;
 	word = NULL;
 	while (*line)
-		init_token(token, &line, word);
+		init_token(&token, &line, word);
 	free(word);
 	return (token);
 }

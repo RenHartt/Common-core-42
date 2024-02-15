@@ -1,31 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_strcsnp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/01 16:13:55 by bgoron            #+#    #+#             */
-/*   Updated: 2024/02/15 16:45:57 by bgoron           ###   ########.fr       */
+/*   Created: 2024/02/15 17:43:52 by bgoron            #+#    #+#             */
+/*   Updated: 2024/02/15 17:44:06 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strdup(const char *s)
+size_t	ft_strcsnp(char *s, char *reject)
 {
-	char	*tab;
-	int		i;
+	size_t	i;
 
 	i = 0;
-	tab = ft_calloc(sizeof(char), (ft_strlen(s) + 1));
-	if (!tab)
-		return (NULL);
-	while (s[i] != '\0')
-	{
-		tab[i] = s[i];
+	while (s[i] && !ft_strchr(reject, s[i]))
 		i++;
-	}
-	tab[i] = '\0';
-	return (tab);
+	return (i);
 }

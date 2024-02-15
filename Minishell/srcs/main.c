@@ -6,7 +6,7 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 13:44:57 by bgoron            #+#    #+#             */
-/*   Updated: 2024/02/15 12:29:11 by bgoron           ###   ########.fr       */
+/*   Updated: 2024/02/15 17:32:40 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,18 @@ int	main(void)
 {
 	char	*line;
 	t_token	*token;
+	t_token	*tmp;
 	
-	line = ft_strdup("<<cat>>|gr'ep srcs|wc -l>test");
+	line = ft_strdup("<<cat>>|grep'' \"\"cswc -l>test");
 	token = parse_token(line);
-	token = token->next;
-	while (token)
+	tmp = token;
+	while (tmp)
 	{
-		printf("%s\n", token->content);
-		printf("%d\n", token->type);
-		token = token->next;
+		printf("%s\n", tmp->content);
+		printf("%d\n", tmp->type);
+		tmp = tmp->next;
 	}
+	free_token(token);
+	free(line);
 	return (0);
 }

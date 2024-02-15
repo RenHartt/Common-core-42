@@ -6,7 +6,7 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 14:27:33 by bgoron            #+#    #+#             */
-/*   Updated: 2024/02/14 16:45:48 by bgoron           ###   ########.fr       */
+/*   Updated: 2024/02/15 17:36:49 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,6 @@ typedef struct s_file
 }					t_file;
 
 t_token	*parse_token(char *line);
+void	free_token(t_token *token);
 
 #endif

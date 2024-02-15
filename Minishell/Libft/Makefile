@@ -6,7 +6,7 @@
 #    By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/31 10:39:42 by bgoron            #+#    #+#              #
-#    Updated: 2024/02/15 11:36:50 by bgoron           ###   ########.fr        #
+#    Updated: 2024/02/15 17:45:55 by bgoron           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,6 +50,8 @@ ft_putendl_fd.c \
 ft_putnbr_fd.c \
 ft_free_tab.c \
 ft_strndup.c \
+ft_strcsnp.c \
+ft_is_white_space.c \
 
 SRCS_BONUS = ft_lstnew_bonus.c \
 ft_lstadd_front_bonus.c \
