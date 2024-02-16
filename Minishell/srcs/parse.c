@@ -6,7 +6,7 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 02:14:45 by bgoron            #+#    #+#             */
-/*   Updated: 2024/02/16 13:42:33 by bgoron           ###   ########.fr       */
+/*   Updated: 2024/02/16 14:20:48 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	append_token(t_token **token, char **line)
 
 void	word_token(t_token **token, char **line, char *word)
 {
-	word = ft_strndup(*line, ft_strcsnp(*line, "\t\n\v\f\r\"' <>|"));
+	word = ft_strndup(*line, ft_strcsnp(*line, "\t\n\v\f\r <>|"));
 	add_token(token, new_token(word, WORD));
 	*line += ft_strlen(word) - 1;
 }
@@ -83,6 +83,8 @@ void	simple_quote_token(t_token **token, char **line, char *word)
 {
 	(*line)++;
 	word = ft_strndup(*line, ft_strcsnp(*line, "'"));
+	word = ft_strjoin(ft_strdup("'"), word, 3);
+	word = ft_strjoin(word, ft_strdup("'"), 3);
 	add_token(token, new_token(word, WORD));
 	*line += ft_strlen(word);
 }
@@ -91,6 +93,8 @@ void	double_quote_token(t_token **token, char **line, char *word)
 {
 	(*line)++;
 	word = ft_strndup(*line, ft_strcsnp(*line, "\""));
+	word = ft_strjoin(ft_strdup("\""), word, 3);
+	word = ft_strjoin(word, ft_strdup("\""), 3);
 	add_token(token, new_token(word, WORD));
 	*line += ft_strlen(word);
 }
@@ -109,10 +113,10 @@ void	init_token(t_token **token, char **line, char *word)
 		add_token(token, new_token(ft_strdup("<"), REDIR_OUT));
 	else if (**line == '>')
 		add_token(token, new_token(ft_strdup(">"), REDIR_IN));
-	else if (**line == '\'')
+	/*else if (**line == '\'')
 		simple_quote_token(token, line, word);
 	else if (**line == '"')
-		double_quote_token(token, line, word);
+		double_quote_token(token, line, word);*/
 	else
 		word_token(token, line, word);
 	(*line)++;
