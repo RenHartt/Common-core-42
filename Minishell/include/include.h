@@ -6,7 +6,7 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 14:27:33 by bgoron            #+#    #+#             */
-/*   Updated: 2024/02/15 17:36:49 by bgoron           ###   ########.fr       */
+/*   Updated: 2024/02/16 12:54:15 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,22 +40,6 @@ typedef struct s_token
 	struct s_token	*next;
 	struct s_token	*prev;
 }					t_token;
-
-typedef struct s_cmd
-{
-	char			**cmd;
-	char			*path;
-	struct s_cmd	*next;
-}				t_cmd;
-
-typedef struct s_file
-{
-	pid_t		pid[1024];
-	int			fd[2];
-	int			infile;
-	int			outfile;
-	int			tmpfile;
-}					t_file;
 
 t_token	*parse_token(char *line);
 void	free_token(t_token *token);

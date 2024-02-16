@@ -1,38 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_substr.c                                        :+:      :+:    :+:   */
+/*   ft_remove_char.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/01 19:42:37 by bgoron            #+#    #+#             */
-/*   Updated: 2024/02/15 21:44:10 by bgoron           ###   ########.fr       */
+/*   Created: 2024/02/15 19:37:20 by bgoron            #+#    #+#             */
+/*   Updated: 2024/02/15 19:40:54 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_remove_char(char *str, char c)
 {
-	char	*tab;
-	int		i;
+	char	*new;
+	char	*tmp;
 
-	i = 0;
-	if (!s)
+	new = malloc(sizeof(char) * (ft_strlen(str) + 1));
+	if (!new)
 		return (NULL);
-	if (start >= ft_strlen(s))
-		len = 0;
-	else if (start + len > ft_strlen(s))
-		len = ft_strlen(s + start);
-	tab = ft_calloc(len + 1, sizeof(char));
-	if (!tab)
-		return (NULL);
-	while (len > 0)
+	tmp = new;
+	while (*str)
 	{
-		tab[i] = s[i + start];
-		i++;
-		len--;
+		if (*str != c)
+		{
+			*tmp = *str;
+			tmp++;
+		}
+		str++;
 	}
-	tab[i] = '\0';
-	return (tab);
+	*tmp = '\0';
+	return (new);
 }

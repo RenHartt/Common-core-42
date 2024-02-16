@@ -6,7 +6,7 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 02:14:45 by bgoron            #+#    #+#             */
-/*   Updated: 2024/02/15 17:52:31 by bgoron           ###   ########.fr       */
+/*   Updated: 2024/02/16 13:42:33 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,13 @@ t_token	*new_token(char *content, t_type type)
 void	add_token(t_token **token, t_token *next)
 {
 	t_token	*tmp;
-	
+
 	if (!token || !next)
 		return ;
 	if (!*token)
 	{
 		*token = next;
-		return ; 
+		return ;
 	}
 	tmp = *token;
 	while (tmp->next)
@@ -74,10 +74,9 @@ void	append_token(t_token **token, char **line)
 
 void	word_token(t_token **token, char **line, char *word)
 {
-	word = ft_strndup(*line, ft_strcsnp(*line, "\t\n\v\f\r'\" <>|"));
+	word = ft_strndup(*line, ft_strcsnp(*line, "\t\n\v\f\r\"' <>|"));
 	add_token(token, new_token(word, WORD));
-	*line += ft_strlen(word);
-	(*line)--;
+	*line += ft_strlen(word) - 1;
 }
 
 void	simple_quote_token(t_token **token, char **line, char *word)
@@ -86,11 +85,6 @@ void	simple_quote_token(t_token **token, char **line, char *word)
 	word = ft_strndup(*line, ft_strcsnp(*line, "'"));
 	add_token(token, new_token(word, WORD));
 	*line += ft_strlen(word);
-}
-
-char	*del_empty_quote(char *str)
-{
-	
 }
 
 void	double_quote_token(t_token **token, char **line, char *word)
@@ -103,11 +97,11 @@ void	double_quote_token(t_token **token, char **line, char *word)
 
 void	init_token(t_token **token, char **line, char *word)
 {
-	while (ft_is_white_space(**line))
+	while (**line && ft_is_white_space(**line))
 		(*line)++;
-	if (!ft_strncmp(*line, "<<", 2))
+	if (**line && !ft_strncmp(*line, "<<", 2))
 		heredoc_token(token, line);
-	else if (!ft_strncmp(*line, ">>", 2))
+	else if (**line && !ft_strncmp(*line, ">>", 2))
 		append_token(token, line);
 	else if (**line == '|')
 		add_token(token, new_token(ft_strdup("|"), PIPE));
@@ -117,7 +111,7 @@ void	init_token(t_token **token, char **line, char *word)
 		add_token(token, new_token(ft_strdup(">"), REDIR_IN));
 	else if (**line == '\'')
 		simple_quote_token(token, line, word);
-	else if (**line == '\"')
+	else if (**line == '"')
 		double_quote_token(token, line, word);
 	else
 		word_token(token, line, word);

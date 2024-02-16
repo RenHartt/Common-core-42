@@ -6,26 +6,19 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 17:14:05 by bgoron            #+#    #+#             */
-/*   Updated: 2023/11/07 14:58:59 by bgoron           ###   ########.fr       */
+/*   Updated: 2024/02/16 12:27:39 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
+int	ft_strncmp(char *s1, char *s2, size_t n)
 {
-	size_t			i;
-	unsigned char	*str1;
-	unsigned char	*str2;
-
-	i = 0;
-	str1 = (unsigned char *)s1;
-	str2 = (unsigned char *)s2;
-	while (str1[i] || str2[i])
-	{
-		if ((str1[i] != str2[i]) && i < n)
-			return (str1[i] - str2[i]);
-		i++;
-	}
-	return (str1[i] - str2[i]);
+	if (!s1 || !s2)
+		return (s1 != s2);
+	while (s1 && *s1 == *s2 && n--)
+		(void)(*s1++ + *s2++);
+	if (!n)
+		return (0);
+	return (*s1 - *s2);
 }

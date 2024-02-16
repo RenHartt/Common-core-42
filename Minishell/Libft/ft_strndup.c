@@ -6,13 +6,13 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 22:25:22 by bgoron            #+#    #+#             */
-/*   Updated: 2024/02/14 22:25:49 by bgoron           ###   ########.fr       */
+/*   Updated: 2024/02/15 20:56:58 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strndup(const char *s1, size_t n)
+char	*ft_strndup(char *s1, size_t n)
 {
 	char	*dup;
 	size_t	i;

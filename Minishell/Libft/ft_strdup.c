@@ -6,13 +6,13 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 16:13:55 by bgoron            #+#    #+#             */
-/*   Updated: 2024/02/15 16:45:57 by bgoron           ###   ########.fr       */
+/*   Updated: 2024/02/15 20:08:05 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strdup(const char *s)
+char	*ft_strdup(char *s)
 {
 	char	*tab;
 	int		i;

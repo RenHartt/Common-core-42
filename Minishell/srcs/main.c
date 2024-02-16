@@ -6,7 +6,7 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 13:44:57 by bgoron            #+#    #+#             */
-/*   Updated: 2024/02/15 17:32:40 by bgoron           ###   ########.fr       */
+/*   Updated: 2024/02/16 13:40:04 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,17 @@ int	main(void)
 	char	*line;
 	t_token	*token;
 	t_token	*tmp;
-	
-	line = ft_strdup("<<cat>>|grep'' \"\"cswc -l>test");
+
+	line = ft_strdup("<<cat ''fdhgdf'' >>''|g '' p\"'\" fdh\"fshfgj\" -l>test");
 	token = parse_token(line);
 	tmp = token;
 	while (tmp)
 	{
-		printf("%s\n", tmp->content);
-		printf("%d\n", tmp->type);
+		printf("({%s}[%d])", tmp->content, tmp->type);
+		if (tmp->next)
+			printf(" -> ");
+		else
+			printf("\n");
 		tmp = tmp->next;
 	}
 	free_token(token);
