@@ -6,7 +6,7 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 10:22:59 by bgoron            #+#    #+#             */
-/*   Updated: 2024/02/15 21:31:39 by bgoron           ###   ########.fr       */
+/*   Updated: 2024/02/16 16:50:53 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 
 void	ft_free_tab(void **tab);
-size_t	ft_strcsnp(char *s, char *reject);
+size_t	ft_strcspn(char *s, char *reject);
 int		ft_is_white_space(char c);
 char	*ft_remove_char(char *str, char c);
 
