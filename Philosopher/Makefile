@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: baptistegoron <baptistegoron@student.42    +#+  +:+       +#+         #
+#    By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/12 14:46:56 by bgoron            #+#    #+#              #
-#    Updated: 2024/03/20 03:56:46 by baptistegor      ###   ########.fr        #
+#    Updated: 2024/03/22 14:08:13 by bgoron           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = philo
 
 CC = cc
 
-CFLAGS = -g3 -Wall -Wextra -Werror -lpthread
+CFLAGS = -g3 -Wall -Wextra -Werror -pthread -fsanitize=thread -static-libsan
 
 IFLAGS = -I ./include
 
