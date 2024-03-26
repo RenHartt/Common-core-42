@@ -6,7 +6,7 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 21:07:09 by bgoron            #+#    #+#             */
-/*   Updated: 2024/03/24 17:48:48 by bgoron           ###   ########.fr       */
+/*   Updated: 2024/03/25 18:38:42 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,28 +56,30 @@ void	dup_close(t_cmd *cmd)
 	close(cmd->fd[1]);
 }
 
-void	exec(t_cmd *cmd)
+void	exec(t_cmd *cmd, char **env)
 {
 	if (cmd && !cmd->empty)
 	{
 		dup_close(cmd);
-		manage_wrong_cmd(cmd);
-		if (is_builtin(cmd->cmd[0]))
+		if (cmd->cmd && is_builtin(cmd->cmd[0]))
 			exec_builtin(cmd);
 		else
 		{
+			manage_wrong_cmd(cmd);
+			env = env_string(*cmd->env);
 			if (cmd->path && cmd->cmd)
-				execve(cmd->path, cmd->cmd, env_string(*cmd->env));
+				execve(cmd->path, cmd->cmd, env);
 			else if (cmd->cmd)
-				execve(cmd->cmd[0], cmd->cmd, env_string(*cmd->env));
-			close(STDIN_FILENO);
-			close(STDOUT_FILENO);
-			close(STDERR_FILENO);
+				execve(cmd->cmd[0], cmd->cmd, env);
+			if (cmd->prev)
+				close(cmd->prev->fd[0]);
+			close(cmd->fd[0]);
+			close(cmd->fd[1]);
+			clear_and_free(cmd);
+			ft_free_tab((void *)env);
 			exit(127);
 		}
-		rl_clear_history();
-		free_env(*cmd->env);
-		free_cmd(first_cmd(cmd));
+		clear_and_free(cmd);
 		exit(EXIT_SUCCESS);
 	}
 }
@@ -87,7 +89,9 @@ void	exec_cmd(t_cmd *cmd)
 	t_cmd	*tmp;
 	pid_t	pid[1024];
 	int		i;
+	char	**env;
 
+	env = NULL;
 	tmp = cmd;
 	if (!tmp)
 		return ;
@@ -99,7 +103,7 @@ void	exec_cmd(t_cmd *cmd)
 			manage_redir(cmd);
 		pid[i] = fork();
 		if (!pid[i++])
-			exec(tmp);
+			exec(tmp, env);
 		close_fd(tmp);
 		tmp = tmp->next;
 	}

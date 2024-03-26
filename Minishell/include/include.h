@@ -6,7 +6,7 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 14:27:33 by bgoron            #+#    #+#             */
-/*   Updated: 2024/03/24 16:30:59 by bgoron           ###   ########.fr       */
+/*   Updated: 2024/03/26 12:25:28 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,13 @@ typedef struct s_cmd
 	struct s_cmd	*prev;
 }				t_cmd;
 
+typedef struct s_data
+{
+	t_token	*token;
+	t_cmd	*cmd;
+	t_env	*env;
+}			t_data;
+
 /* ************************************************************************** */
 /*                                Parsing line                                */
 /* ************************************************************************** */
@@ -126,6 +133,8 @@ t_cmd	*new_cmd(t_env **env);
 void	add_cmd(t_cmd **cmd, t_cmd *new);
 t_redir	*new_redir(t_type type, char *file);
 void	add_redir(t_redir **redir, t_redir *new);
+void	parse_token(t_cmd **tmp, t_token **token);
+void	add_cmd_and_next(t_cmd **tmp, t_token **token, t_env **env);
 char	*find_path(char *cmd, t_env *env);
 t_cmd	*init_cmd(t_token *token, t_env **env);
 int		ft_check_permissions(char *path);
@@ -140,10 +149,11 @@ t_cmd	*first_cmd(t_cmd *cmd);
 t_cmd	*last_cmd(t_cmd *cmd);
 int		last_is_heredoc(t_redir *redir);
 void	close_fd(t_cmd *tmp);
-void	handle_heredoc(t_token *token, t_cmd *cmd);
+int		handle_heredoc(t_token *token, t_cmd *cmd);
 void	manage_redir(t_cmd *cmd);
 char	**env_string(t_env *env);
 int		is_builtin(char *cmd);
+void	manage_wrong_builtin(t_cmd *cmd);
 void	exec_builtin(t_cmd *cmd);
 void	exec_cmd(t_cmd *cmd);
 void	exec_line(t_cmd *cmd);
@@ -157,7 +167,7 @@ void	ft_cd(char *path, t_env **env);
 void	ft_echo(t_cmd *cmd);
 void	ft_export(t_cmd *cmd);
 void	ft_unset(t_cmd *cmd);
-void	ft_env(t_cmd *cmd);
+void	ft_env(t_env *env);
 void	ft_exit(t_cmd *cmd);
 
 /* ************************************************************************** */
@@ -166,6 +176,7 @@ void	ft_exit(t_cmd *cmd);
 
 void	ignore_handler(int signum);
 void	signal_handler(int signum);
+void	heredoc_signal_handler(int signum);
 char	*get_prompt(void);
 void	init_shell(char **envp, t_env **env);
 
@@ -173,12 +184,19 @@ void	init_shell(char **envp, t_env **env);
 /*                                    Error                                   */
 /* ************************************************************************** */
 
-void	exit_minishell(t_env *env);
-void	prompt_error(char *error, int code);
+int		put_error(char *str, int exit_code);
 void	free_token_content(t_token *token);
 void	free_token(t_token *token);
 void	free_redir(t_redir *redir);
 void	free_env(t_env *env);
 void	free_cmd(t_cmd *cmd);
+void	clear_and_free(t_cmd *cmd);
+
+/* ************************************************************************** */
+/*                                    Utils                                   */
+/* ************************************************************************** */
+
+char	*ft_random(int size, char *file);
+void	exit_minishell(t_env *env);
 
 #endif

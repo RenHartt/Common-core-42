@@ -1,45 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   permission.c                                       :+:      :+:    :+:   */
+/*   heredoc_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/24 16:29:22 by bgoron            #+#    #+#             */
-/*   Updated: 2024/03/25 13:08:37 by bgoron           ###   ########.fr       */
+/*   Created: 2024/03/25 13:07:05 by bgoron            #+#    #+#             */
+/*   Updated: 2024/03/26 11:17:39 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.h"
 
-extern int	g_exit_code;
-
-int	ft_check_permissions(char *path)
+int	ft_abs(int nb)
 {
-	if (access(path, X_OK) && errno == EACCES)
-	{
-		g_exit_code = 126;
-		return (1);
-	}
-	return (0);
+	if (nb < 0)
+		return (-nb);
+	return (nb);
 }
 
-int	ft_is_directory(char *path)
+char	random_c(char *file)
 {
+	int	i;
+
+	i = ft_abs(file[0] % 52);
+	if (i < 26)
+		return (i + 65);
+	return (i + 71);
+}
+
+char	*ft_random(int size, char *file)
+{
+	int	i;
 	int	fd;
 
-	if (!path)
-		return (0);
-	fd = open(path, O_RDWR);
-	if (fd == -1 && errno == EISDIR)
-	{
-		printf("Minishell: %s: Is a directory\n", path);
-		g_exit_code = 126;
-		if (fd > 0)
-			close(fd);
-		return (1);
-	}
-	if (fd > 0)
-		close(fd);
-	return (0);
+	i = 0;
+	fd = open("/dev/random", O_RDONLY);
+	if (fd == -1)
+		return (NULL);
+	file[0] = '.';
+	read(fd, file + 1, size);
+	while (++i < size)
+		file[i] = random_c(file + i);
+	file[i] = '\0';
+	close(fd);
+	return (file);
 }

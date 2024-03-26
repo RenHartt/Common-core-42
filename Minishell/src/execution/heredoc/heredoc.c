@@ -6,11 +6,13 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 15:43:27 by bgoron            #+#    #+#             */
-/*   Updated: 2024/03/24 17:37:44 by bgoron           ###   ########.fr       */
+/*   Updated: 2024/03/25 13:07:17 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.h"
+
+extern int	g_exit_code;
 
 int	last_is_heredoc(t_redir *redir)
 {
@@ -28,26 +30,11 @@ int	last_is_heredoc(t_redir *redir)
 	return (last == HERE_DOC);
 }
 
-char	*ft_random(int size, char *file)
+void	write_heredoc(char *limiter, int fd, t_cmd *cmd)
 {
-	int	i;
-	int	fd;
+	char	*line;
 
-	i = 0;
-	fd = open("/dev/random", O_RDONLY);
-	if (fd == -1)
-		return (NULL);
-	file[0] = '.';
-	read(fd, file + 1, size);
-	while (++i < size)
-		file[i] = (file[i] % 26) + 97;
-	file[i] = '\0';
-	close(fd);
-	return (file);
-}
-
-void	write_heredoc(char *line, char *limiter, int fd, t_cmd *cmd)
-{
+	line = NULL;
 	fd = open(cmd->heredoc_name, O_WRONLY | O_CREAT | O_EXCL | O_TRUNC, 0600);
 	while (1)
 	{
@@ -63,32 +50,50 @@ void	write_heredoc(char *line, char *limiter, int fd, t_cmd *cmd)
 	close(fd);
 }
 
-int	heredoc(char *limiter, t_token *token, t_cmd *cmd, t_cmd *tmp)
+int	caca(char *limiter, t_cmd *cmd, t_token *token, t_cmd *tmp)
 {
-	char	*line;
-	pid_t	pid;
-	int		fd;
+	int	fd;
 
 	fd = 0;
-	line = NULL;
+	rl_catch_signals = 1;
+	g_exit_code = 0;
+	signal(SIGINT, heredoc_signal_handler);
+	write_heredoc(limiter, fd, tmp);
+	clear_and_free(cmd);
+	free_token(token);
+	return (fd);
+}
+
+int	heredoc(char *limiter, t_token *token, t_cmd *cmd, t_cmd *tmp)
+{
+	pid_t	pid;
+	int		status;
+	int		fd;
+
+	status = 0;
+	fd = 0;
 	ft_random(10, tmp->heredoc_name);
+	signal(SIGINT, SIG_IGN);
 	pid = fork();
 	if (!pid)
 	{
-		write_heredoc(line, limiter, fd, tmp);
-		rl_clear_history();
-		free_token(token);
-		free_env(*cmd->env);
-		free_cmd(cmd);
-		exit(EXIT_SUCCESS);
+		fd = caca(limiter, cmd, token, tmp);
+		exit(g_exit_code == 130);
 	}
-	waitpid(pid, NULL, 0);
+	waitpid(pid, &status, 0);
+	signal(SIGINT, signal_handler);
+	if (WEXITSTATUS(status) == 1)
+	{
+		g_exit_code = 130;
+		unlink(tmp->heredoc_name);
+		return (-1);
+	}
 	fd = open(tmp->heredoc_name, O_RDONLY);
 	unlink(tmp->heredoc_name);
 	return (fd);
 }
 
-void	handle_heredoc(t_token *token, t_cmd *cmd)
+int	handle_heredoc(t_token *token, t_cmd *cmd)
 {
 	t_cmd	*tmp;
 	t_redir	*redir_tmp;
@@ -106,10 +111,13 @@ void	handle_heredoc(t_token *token, t_cmd *cmd)
 				if (fd)
 					close(fd);
 				fd = heredoc(redir_tmp->file, token, cmd, tmp);
+				if (fd == -1)
+					return (1);
 				tmp->heredoc_file = fd;
 			}
 			redir_tmp = redir_tmp->next;
 		}
 		tmp = tmp->next;
 	}
+	return (0);
 }

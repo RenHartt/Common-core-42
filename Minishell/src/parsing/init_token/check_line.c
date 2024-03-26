@@ -6,11 +6,20 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 01:33:15 by bgoron            #+#    #+#             */
-/*   Updated: 2024/03/12 23:44:41 by bgoron           ###   ########.fr       */
+/*   Updated: 2024/03/26 12:32:16 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.h"
+
+t_token	*last_token(t_token *token)
+{
+	if (!token)
+		return (NULL);
+	while (token->next)
+		token = token->next;
+	return (token);
+}
 
 int	is_token(char c)
 {
@@ -30,6 +39,8 @@ int	check_quote(char *line, t_quote quote)
 {
 	while (*line)
 		quote = quote_state(line++, quote);
+	if (quote != NO_QUOTE)
+		put_error("minishell: syntax error: quote not close", 2);
 	return (quote);
 }
 

@@ -6,7 +6,7 @@
 /*   By: bgoron <bgoron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 14:03:31 by bgoron            #+#    #+#             */
-/*   Updated: 2024/03/24 15:36:56 by bgoron           ###   ########.fr       */
+/*   Updated: 2024/03/24 20:58:06 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,19 @@ void	signal_handler(int signum)
 		rl_on_new_line();
 		rl_redisplay();
 		g_exit_code = 130;
+	}
+}
+
+void	heredoc_signal_handler(int signum)
+{
+	if (signum == 2)
+	{
+		g_exit_code = 130;
+		rl_replace_line("", 0);
+		rl_on_new_line();
+		rl_redisplay();
+		printf("^C\n");
+		close(0);
 	}
 }
 
